@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="login.css">
+    <title>Gestion de Location de Voitures</title>
+</head>
+<body>
+
+<div class="conteneur" id="conteneur">
+    <!-- Formulaire d'inscription -->
+    <div class="conteneur-formulaire inscription" style="display: block;">
+        <form id="formInscription" action="connexion.php" method="POST">
+            <h1>Créer un compte</h1>
+            <input type="email" placeholder="Email" required id="email" name="email">
+            <div id="emailError" style="color: red; display: none;">L'email existe déjà.</div>
+            <input type="password" placeholder="Mot de passe" required id="motdepasse" name="motdepasse">
+            <input type="text" placeholder="CIN" required name="cin">
+            <input type="tel" placeholder="Téléphone" required name="telephone">
+            <input type="text" placeholder="Numéro de permis" required name="numeroPermis">
+
+            <!-- Affichage du message d'erreur -->
+         
+            <button type="submit" name="inscription">S'inscrire</button>
+            <div id="successMessage" style="color: green; display: none; margin-top: 10px;">
+                Inscription réussie ! 
+            </div>
+        </form>
+    </div>
+
+    <!-- Formulaire de connexion -->
+    <div class="conteneur-formulaire connexion" style="display: block;">
+        <form id="formConnexion" action="connexion.php" method="POST">
+            <h1>Connexion</h1>
+            <input type="email" placeholder="Email" required id="emailConnexion" name="emailConnexion">
+            <input type="password" placeholder="Mot de passe" required id="motdepasseConnexion" name="motdepasseConnexion">
+            
+         
+
+            <button type="submit" name="connexion">Se connecter</button>
+        </form>
+    </div>
+   
+    <!-- Section bascule entre Connexion et Inscription -->
+    <div class="conteneur-bascule">
+        <div class="bascule">
+            <div class="panneau-bascule panneau-gauche">
+                <h1>Rejoignez-nous dès aujourd'hui !</h1>
+                <p>Créez votre compte et accédez à des offres exclusives, une réservation simplifiée et un service sur-mesure.</p>
+                <button class="caché" id="connexion">Connexion</button>
+            </div>
+            <div class="panneau-bascule panneau-droit">
+                <h1>Bienvenue !</h1>
+                <p>Créez un compte pour réserver votre voiture rapidement et facilement.</p>
+                <button class="caché" id="inscription">Créer un compte</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Sélection des éléments nécessaires
+    const conteneur = document.getElementById('conteneur');
+    const boutonInscription = document.getElementById('inscription');
+    const boutonConnexion = document.getElementById('connexion');
+    const formInscription = document.getElementById('formInscription');
+    const formConnexion = document.getElementById('formConnexion');
+
+    // Gestion des boutons pour basculer entre Connexion et Inscription
+    boutonInscription.addEventListener('click', () => {
+        conteneur.classList.add("actif");
+    });
+
+    boutonConnexion.addEventListener('click', () => {
+        conteneur.classList.remove("actif");
+    });
+
+    function afficherNotification(message, type) {
+        const container = document.getElementById("notification-container");
+        const notification = document.createElement("div");
+        notification.className = `notification p-4 rounded-md ${
+            type === "success" ? "bg-green-500" : "bg-red-500"
+        } text-white`;
+        notification.textContent = message;
+
+        container.appendChild(notification);
+
+        // Masquer et supprimer la notification après 3 secondes
+        setTimeout(() => {
+            notification.classList.add("hidden");
+            setTimeout(() => notification.remove(), 500);
+        }, 3000);
+    }
+
+    document.getElementById('formInscription').addEventListener('submit', (event) => {
+        afficherNotification('CONGRALATUTIONS ', 'success');
+    });
+</script>
+</body>
+</html>

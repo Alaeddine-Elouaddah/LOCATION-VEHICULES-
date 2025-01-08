@@ -1,0 +1,124 @@
+/* General reset */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+  }
+  
+  
+  /* Sidebar */
+  .sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #1e2a38;
+    color: #fff;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .sidebar .logo {
+    text-align: center;
+    padding: 20px;
+    background-color: #16222a;
+    border-bottom: 1px solid #333;
+  }
+  
+  .sidebar .menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1;
+  }
+  
+  .sidebar .menu-item {
+    border-bottom: 1px solid #333;
+  }
+  
+  .sidebar .menu-item a {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: #ddd;
+    font-size: 16px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .sidebar .menu-item a i {
+    margin-right: 10px;
+  }
+  
+  .sidebar .menu-item.active a,
+  .sidebar .menu-item a:hover {
+    background-color: #12c85e;
+    color: #fff;
+  }
+  
+  /* Content */
+  .content {
+    margin-left: 250px;
+    padding: 20px;
+  }
+  
+  header h1 {
+    margin: 0;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #ddd;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .sidebar {
+        width: 60px;
+    }
+  
+    .sidebar .menu-item a {
+        justify-content: center;
+        font-size: 14px;
+    }
+  
+    .sidebar .menu-item a i {
+        margin-right: 0;
+    }
+  
+    .content {
+        margin-left: 60px;
+    }
+  }
+  
+  #message-succes {
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+  }
+  
+  #message-succes:not(.hidden) {
+      opacity: 1;
+  }
+  /* Styles pour les notifications */
+.notification {
+    padding: 15px 20px;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 10px;
+    animation: slideIn 0.5s ease-in-out;
+}
+
+.notification.success {
+    background-color: #4CAF50; /* Vert */
+}
+
+.notification.error {
+    background-color: #F44336; /* Rouge */
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+} 

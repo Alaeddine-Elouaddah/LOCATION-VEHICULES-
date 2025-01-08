@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="index.css" />
+    <title>Maîtrise du Design Web | Location des Véhicules</title>
+    <style>
+      /* Style pour centrer la div et la styliser */
+      #ALAE {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh; /* Prend toute la hauteur de la vue */
+        background-color: white; /* Couleur de fond légère */
+        padding: 20px;
+        box-sizing: border-box;
+      }
+    
+      #contact__container {
+        background-color: #ffffff;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        width: 100%;
+        text-align: center;
+      }
+    
+      #contact__subheader {
+        font-size: 1.2em;
+        color: #666;
+        margin-bottom: 10px;
+      }
+    
+      #contact__header {
+        font-size: 2em;
+        color: #333;
+        margin-bottom: 20px;
+      }
+    
+      #contact__info {
+        margin-bottom: 30px;
+      }
+    
+      #contact__phone,
+      #contact__email {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 15px;
+      }
+    
+      #phone__icon,
+      #email__icon {
+        font-size: 1.5em;
+        color: #007bff;
+        margin-right: 10px;
+      }
+    
+      #contact__phone h4,
+      #contact__email h4 {
+        margin: 0;
+        font-size: 1.1em;
+        color: #333;
+      }
+    
+      #contact__phone p,
+      #contact__email p {
+        margin: 0;
+        font-size: 1em;
+        color: #666;
+      }
+    
+      #contact__phone a,
+      #contact__email a {
+        color: #007bff;
+        text-decoration: none;
+      }
+    
+      #contact__phone a:hover,
+      #contact__email a:hover {
+        text-decoration: underline;
+      }
+    
+      #contact__cta {
+        margin-top: 20px;
+      }
+    
+      #contact__cta p {
+        font-size: 1em;
+        color: #666;
+        margin-bottom: 20px;
+      }
+    
+      #whatsapp__button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #25d366; /* Couleur WhatsApp */
+        color: #ffffff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 1em;
+        transition: background-color 0.3s ease;
+      }
+    
+      #whatsapp__button i {
+        margin-right: 10px;
+      }
+    
+      #whatsapp__button:hover {
+        background-color: #128c7e; /* Couleur WhatsApp au survol */
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="nav__header">
+          <div class="nav__logo">
+            <a href="#">Location des Véhicules</a>
+          </div>
+          <div class="nav__menu__btn" id="menu-btn">
+            <i class="ri-menu-line"></i>
+          </div>
+        </div>
+        <ul class="nav__links" id="nav-links">
+          <li><a href="#home">Accueil</a></li>
+          <li><a href="#rent">Location</a></li>
+          <li><a href="#service">Services</a></li>
+          <li><a href="#ride">Conduite</a></li>
+          <li><a href="#ALAE">Contact</a></li>
+          <li class="nav__links__btn">
+            <button class="btn">S'inscrire</button>
+          </li>
+          <li class="nav__links__btn">
+            <button class="btn">Se connecter</button>
+          </li>
+        </ul>
+        <div class="nav__btns">    
+           <button class="btn btn__secondary" onclick="window.location.href='connexion.php';">S'inscrire / Se connecter</button>
+        </div>
+      </nav>
+      <div class="section__container header__container" id="home">
+        <div class="header__image">
+          <img src="assets/header.png" alt="header" />
+        </div>
+        <div class="header__content">
+          <h1>Vous souhaitez économiser sur votre location de véhicule ?</h1>
+          <p>
+            Découvrez les options de location de véhicules avec Location des Véhicules. 
+            Choisissez parmi une gamme de véhicules adaptés à vos besoins et profitez de nos offres exclusives.
+          </p>
+         
+        </div>
+      </div>
+    </header>
+
+    <section class="section__container steps__container" id="rent">
+      <p class="section__subheader">COMMENT ÇA MARCHE</p>
+      <h2 class="section__header">Location des Véhicules suit 3 étapes simples</h2>
+      <div class="steps__grid">
+        <!-- Étape 1 : Créez un compte -->
+        <div class="steps__card">
+          <span><i class="ri-user-add-fill"></i></span>
+          <h4>Créez un compte</h4>
+          <p>
+            Inscrivez-vous en quelques minutes pour accéder à des offres exclusives et gérer vos réservations en ligne.
+          </p>
+        </div>
+        <div class="steps__card">
+          <span><i class="ri-calendar-check-fill"></i></span>
+          <h4>Date de réservation</h4>
+          <p>
+            Choisissez la date et l'heure de votre réservation pour garantir la disponibilité de votre véhicule.
+          </p>
+        </div>
+        <div class="steps__card">
+          <span><i class="ri-bookmark-3-fill"></i></span>
+          <h4>Réservez votre véhicule</h4>
+          <p>
+            Trouvez et réservez le véhicule idéal en quelques clics.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section__container service__container" id="service">
+      <div class="service__image">
+        <img src="assets/image.png" alt="service" />
+      </div>
+      <div class="service__content">
+        <p class="section__subheader">MEILLEURS SERVICES</p>
+        <h2 class="section__header">
+          Profitez de la meilleure expérience avec nos offres de location
+        </h2>
+        <ul class="service__list">
+          <li>
+            <span><i class="ri-price-tag-3-fill"></i></span>
+            <div>
+              <h4>Offres pour tous les budgets</h4>
+              <p>
+                Des véhicules économiques aux modèles de luxe, nous avons quelque chose pour tout le monde, vous garantissant le meilleur rapport qualité-prix.
+              </p>
+            </div>
+          </li>
+          <li>
+            <span><i class="ri-wallet-fill"></i></span>
+            <div>
+              <h4>Garantie du meilleur prix</h4>
+              <p>
+                Nous vous garantissons des tarifs compétitifs sur le marché, afin que vous puissiez réserver en toute confiance en sachant que vous obtenez la meilleure offre.
+              </p>
+            </div>
+          </li>
+          <li>
+            <span><i class="ri-customer-service-fill"></i></span>
+            <div>
+              <h4>Support 24/7</h4>
+              <p>
+                Notre équipe dédiée est disponible 24h/24 et 7j/7 pour vous aider avec toutes vos questions ou préoccupations, garantissant une expérience de location fluide.
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section__container experience__container" id="ride">
+      <p class="section__subheader">EXPÉRIENCE CLIENT</p>
+      <h2 class="section__header">
+        Nous garantissons la meilleure expérience client
+      </h2>
+      <div class="experience__content">
+        <div class="experience__card">
+          <span><i class="ri-price-tag-3-fill"></i></span>
+          <h4>Tarifs compétitifs</h4>
+        </div>
+        <div class="experience__card">
+          <span><i class="ri-money-rupee-circle-fill"></i></span>
+          <h4>Location facile selon votre budget</h4>
+        </div>
+        <div class="experience__card">
+          <span><i class="ri-bank-card-fill"></i></span>
+          <h4>Plans de paiement les plus flexibles</h4>
+        </div>
+        <div class="experience__card">
+          <span><i class="ri-award-fill"></i></span>
+          <h4>Les meilleures garanties automobiles étendues</h4>
+        </div>
+        <div class="experience__card">
+          <span><i class="ri-customer-service-2-fill"></i></span>
+          <h4>Assistance routière 24/7</h4>
+        </div>
+        <div class="experience__card">
+          <span><i class="ri-car-fill"></i></span>
+          <h4>Véhicules bien entretenus</h4>
+        </div>
+        <img src="assets/experience.png" alt="experience" />
+      </div>
+    </section>
+
+    <!-- Section Contact -->
+    <div id="ALAE">
+      <section id="contact__container">
+          <p id="contact__subheader">CONTACTEZ-NOUS</p>
+          <h2 id="contact__header">Nous sommes à votre écoute</h2>
+          <div id="contact__content">
+              <div id="contact__info">
+                  <!-- Téléphone -->
+                  <div id="contact__phone">
+                      <span id="phone__icon">
+                          <i class="ri-phone-fill"></i>
+                      </span>
+                      <div>
+                          <h4>Téléphone</h4>
+                          <p>
+                              <a href="tel:+212657589657">+212 657 589 657</a> (Fixe)
+                          </p>
+                      </div>
+                  </div>
+                  <!-- Email -->
+                  <div id="contact__email">
+                      <span id="email__icon">
+                          <i class="ri-mail-fill"></i>
+                      </span>
+                      <div>
+                          <h4>Email</h4>
+                          <p>
+                              <a href="mailto:alaeddineelouaddah09@gmail.com">alaeddineelouaddah09@gmail.com</a>
+                          </p>
+                      </div>
+                  </div>
+              </div>
+              <!-- Bouton WhatsApp -->
+              <div id="contact__cta">
+                  <p>Pour toute question ou assistance, n'hésitez pas à nous contacter.</p>
+                  <br><br>
+                  <a href="https://wa.me/+212657589657" id="whatsapp__button">
+                      <i class="ri-whatsapp-fill"></i> Nous contacter sur WhatsApp
+                  </a>
+              </div>
+          </div>
+      </section>
+    </div>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="index.js"></script>
+  </body>
+</html>
