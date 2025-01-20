@@ -23,8 +23,8 @@ try {
     $idReservation = $data['id'];
     $reason = $data['reason'];
 
-    // Récupérer l'ID du client associé à la réservation
-    $stmt = $pdo->prepare("SELECT clientId FROM reservation WHERE idReservation = :idReservation");
+    // Récupérer l'ID du client et l'ID du véhicule associé à la réservation
+    $stmt = $pdo->prepare("SELECT clientId, vehiculeId FROM reservation WHERE idReservation = :idReservation");
     $stmt->execute(['idReservation' => $idReservation]);
     $reservation = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -33,10 +33,15 @@ try {
     }
 
     $clientId = $reservation['clientId'];
+    $vehiculeId = $reservation['vehiculeId'];
 
     // Annuler la réservation
     $stmt = $pdo->prepare("UPDATE reservation SET statut = 'Annulée' WHERE idReservation = :idReservation");
     $stmt->execute(['idReservation' => $idReservation]);
+
+    // Mettre à jour le statut du véhicule à "Disponible"
+    $stmt = $pdo->prepare("UPDATE vehicule SET disponible = 'Disponible' WHERE idVehicule = :vehiculeId");
+    $stmt->execute(['vehiculeId' => $vehiculeId]);
 
     // Insérer la notification dans la table `notification`
     $stmt = $pdo->prepare("INSERT INTO notification (clientId, message, dateEnvoi) VALUES (:clientId, :message, NOW())");

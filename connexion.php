@@ -6,6 +6,7 @@ include('db.php'); // Connexion à la base de données
 define('ROLE_ADMIN', 'Admin');
 define('ROLE_CLIENT', 'Client');
 
+
 // Initialiser une variable pour afficher un message d'erreur ou de succès
 $message = "";
 
@@ -59,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     header('Location: admin.php');
                     exit;
                 } else if ($user['role'] == ROLE_CLIENT) {
-                    header('Location: client.html');
+                    header('Location: client.php');
                     exit;
                 }
             }

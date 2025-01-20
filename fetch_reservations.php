@@ -18,10 +18,8 @@ try {
             u.email, 
             v.marque, 
             v.modele, 
-            r.dateDebut, 
-            r.dateFin, 
-            r.heureReservation, 
-            r.heureRetour, 
+            r.dateHeureDebut AS dateDebut, 
+            r.dateHeureFin AS dateFin, 
             r.statut
         FROM reservation r
         JOIN utilisateur u ON r.clientId = u.id

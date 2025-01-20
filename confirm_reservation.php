@@ -22,8 +22,8 @@ try {
 
     $idReservation = $data['id'];
 
-    // Récupérer l'ID du client associé à la réservation
-    $stmt = $pdo->prepare("SELECT clientId FROM reservation WHERE idReservation = :idReservation");
+    // Récupérer l'ID du client et l'ID du véhicule associé à la réservation
+    $stmt = $pdo->prepare("SELECT clientId, vehiculeId FROM reservation WHERE idReservation = :idReservation");
     $stmt->execute(['idReservation' => $idReservation]);
     $reservation = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -32,18 +32,23 @@ try {
     }
 
     $clientId = $reservation['clientId'];
+    $vehiculeId = $reservation['vehiculeId'];
 
     // Confirmer la réservation
     $stmt = $pdo->prepare("UPDATE reservation SET statut = 'Confirmée' WHERE idReservation = :idReservation");
     $stmt->execute(['idReservation' => $idReservation]);
 
+    // Mettre à jour le statut du véhicule à "Non Disponible"
+    $stmt = $pdo->prepare("UPDATE vehicule SET disponible = 'Non Disponible' WHERE idVehicule = :vehiculeId");
+    $stmt->execute(['vehiculeId' => $vehiculeId]);
+
     // Insérer la notification dans la table `notification`
     $stmt = $pdo->prepare("INSERT INTO notification (clientId, message, dateEnvoi) VALUES (:clientId, :message, NOW())");
     $stmt->execute([
         'clientId' => $clientId,
-        'message' => "Votre réservation a été confirmée. Veuillez respecter la date s de réservation et venir récupérer votre véhicule."
+        'message' => "Votre réservation a été confirmée. Veuillez respecter la date et l'heure de réservation et venir récupérer votre véhicule."
     ]);
-     
+
     // Réponse JSON en cas de succès
     echo json_encode(['success' => true]);
 } catch (PDOException $e) {
