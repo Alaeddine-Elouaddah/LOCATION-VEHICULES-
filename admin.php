@@ -353,18 +353,16 @@ try {
       </section>
 
       <!-- Section Véhicules -->
-
-      <!-- ********************************** -->
       <section id="vehicules" class="hidden p-4 space-y-6 bg-white flex flex-col rounded-lg shadow-md">
-  <h2 class="text-xl font-semibold text-gray-900">Gestion des Véhicules</h2>
-  <div class="flex justify-between items-center">
-    <button class="bg-teal-500 text-white px-4 py-2 rounded-md hover:bg-teal-600" onclick="showAddModal()">
-      Ajouter un Véhicule
-    </button>
-    <input type="text" id="searchVehicules" placeholder="Rechercher un véhicule..." class="p-2 rounded-md border border-gray-300">
-  </div>
-  <table class="w-full bg-white rounded-md overflow-hidden">
-  <thead>
+        <h2 class="text-xl font-semibold text-gray-900">Gestion des Véhicules</h2>
+        <div class="flex justify-between items-center">
+          <button class="bg-teal-500 text-white px-4 py-2 rounded-md hover:bg-teal-600" onclick="showAddModal()">
+            Ajouter un Véhicule
+          </button>
+          <input type="text" id="searchVehicules" placeholder="Rechercher un véhicule..." class="p-2 rounded-md border border-gray-300">
+        </div>
+        <table class="w-full bg-white rounded-md overflow-hidden">
+          <thead>
             <tr>
               <th class="px-4 py-2 text-left">ID</th>
               <th class="px-4 py-2 text-left">Marque</th>
@@ -381,77 +379,54 @@ try {
           <tbody id="vehiculesTableBody">
             <!-- Contenu dynamique -->
           </tbody>
-  </table>
-</section>
+        </table>
+      </section>
 
       <!-- Section Réservations -->
-     <!-- Section Réservations -->
-
-<section id="reservations" class="hidden p-4 space-y-6 bg-white flex flex-col rounded-lg shadow-md">
-<div class="flex justify-between items-center"> <!-- Utilisez "justify-between" pour aligner les éléments aux extrémités -->
-  <h2 class="text-xl font-semibold text-gray-900">Gestion des Réservations</h2>
-  <input type="text" id="searchReservations" placeholder="Rechercher une réservation..." class="p-2 rounded-md border border-gray-300">
-</div>
-  <table class="w-full bg-white rounded-md overflow-hidden">
-    <!-- Table content -->
-    <thead>
-      <tr>
-        <th class="px-4 py-2 text-left">ID</th>
-        <th class="px-4 py-2 text-left">Client</th>
-        <th class="px-4 py-2 text-left">Véhicule</th>
-        <th class="px-4 py-2 text-left">Date et heure de début</th>
-        <th class="px-4 py-2 text-left">Date et heure de fin</th>
-        <th class="px-4 py-2 text-left">Statut</th>
-        <th class="px-4 py-2 text-left">Actions</th>
-      </tr>
-    </thead>
-    <tbody id="reservationsTableBody">
-      <!-- Contenu dynamique -->
-    </tbody>
-  </table>
-</section>
-
-<!-- Modale de confirmation d'annulation -->
-<div id="cancelReservationModal" class="modal">
-  <div class="modal-content">
-    <h2 class="text-xl font-semibold text-gray-100 mb-4">Annuler la Réservation</h2>
-    <form id="cancelReservationForm">
-      <input type="hidden" id="reservationId" name="reservationId" />
-      <div class="space-y-4">
-        <label for="reason" class="block text-gray-300">Raison de l'annulation :</label>
-        <textarea id="reason" name="reason" rows="4" class="p-2 rounded-md bg-gray-700 text-gray-100 w-full" required></textarea>
-      </div>
-      <div class="mt-6 flex justify-end space-x-4">
-        <button type="button" id="cancelCancelReservation" class="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600">Annuler</button>
-        <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">Confirmer l'annulation</button>
-      </div>
-    </form>
-  </div>
-</div>
+      <section id="reservations" class="hidden p-4 space-y-6 bg-white flex flex-col rounded-lg shadow-md">
+        <div class="flex justify-between items-center">
+          <h2 class="text-xl font-semibold text-gray-900">Gestion des Réservations</h2>
+          <input type="text" id="searchReservations" placeholder="Rechercher une réservation..." class="p-2 rounded-md border border-gray-300">
+        </div>
+        <table class="w-full bg-white rounded-md overflow-hidden">
+          <thead>
+            <tr>
+              <th class="px-4 py-2 text-left">ID</th>
+              <th class="px-4 py-2 text-left">Client</th>
+              <th class="px-4 py-2 text-left">Véhicule</th>
+              <th class="px-4 py-2 text-left">Date et heure de début</th>
+              <th class="px-4 py-2 text-left">Date et heure de fin</th>
+              <th class="px-4 py-2 text-left">Statut</th>
+              <th class="px-4 py-2 text-left">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="reservationsTableBody">
+            <!-- Contenu dynamique -->
+          </tbody>
+        </table>
+      </section>
 
       <!-- Section Clients -->
       <section id="clients" class="hidden p-4 space-y-6 bg-white flex flex-col rounded-lg shadow-md">
-  <div class="flex justify-between items-center"> <!-- Utilisez "justify-between" pour aligner les éléments aux extrémités -->
-  <h2 class="text-xl font-semibold text-gray-900">Gestion des Clients</h2>
-  <input type="text" id="searchClients" placeholder="Rechercher un client..." class="p-2 rounded-md border border-gray-300">
-</div>
-  <table class="w-full bg-white rounded-md overflow-hidden">
-    <!-- Table content -->
-    <thead>
+        <div class="flex justify-between items-center">
+          <h2 class="text-xl font-semibold text-gray-900">Gestion des Clients</h2>
+          <input type="text" id="searchClients" placeholder="Rechercher un client..." class="p-2 rounded-md border border-gray-300">
+        </div>
+        <table class="w-full bg-white rounded-md overflow-hidden">
+          <thead>
             <tr>
-              
               <th class="px-4 py-2 text-left">Email</th>
-              <th class="px-4 py-2 text-left">telephone</th>
-              <th class="px-4 py-2 text-left">Cin</th>
-              <th class="px-4 py-2 text-left">Numero de permis </th>
+              <th class="px-4 py-2 text-left">Téléphone</th>
+              <th class="px-4 py-2 text-left">CIN</th>
+              <th class="px-4 py-2 text-left">Numéro de permis</th>
               <th class="px-4 py-2 text-left">Actions</th>
             </tr>
           </thead>
           <tbody id="clientsTableBody">
             <!-- Contenu dynamique -->
           </tbody>
-  </table>
-</section>
+        </table>
+      </section>
     </main>
   </div>
 
@@ -561,258 +536,222 @@ try {
       </form>
     </div>
   </div>
-<!-- Modal de confirmation de réservation -->
-<!-- Arrière-plan flou et sombre -->
-<div id="modalOverlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-40"></div>
 
-<!-- Modale de modification des clients -->
-<!-- Modal d'édition des clients -->
-<div id="editClientModal" class="modal hidden">
+  <!-- Modale de confirmation d'annulation -->
+  <div id="cancelReservationModal" class="modal">
     <div class="modal-content">
-        <h2 class="text-xl font-semibold text-gray-100 mb-4">Modifier Client</h2>
-        <form id="editClientForm" class="space-y-4">
-            <!-- Champ caché pour l'email -->
-            <input type="hidden" id="editClientEmail" name="email" />
-
-            <!-- Champ pour le téléphone -->
-            <label for="editClientTelephone" class="block text-gray-300">Téléphone</label>
-            <input type="text" id="editClientTelephone" name="telephone" placeholder="Téléphone" required
-                   class="p-2 rounded-md bg-gray-700 text-gray-100 w-full" />
-
-            <!-- Champ pour le CIN -->
-            <label for="editClientCin" class="block text-gray-300">CIN</label>
-            <input type="text" id="editClientCin" name="cin" placeholder="CIN" required
-                   class="p-2 rounded-md bg-gray-700 text-gray-100 w-full" />
-
-            <!-- Champ pour le numéro de permis -->
-            <label for="editClientNumeroPermis" class="block text-gray-300">Numéro de Permis</label>
-            <input type="text" id="editClientNumeroPermis" name="numeroPermis" placeholder="Numéro de Permis" required
-                   class="p-2 rounded-md bg-gray-700 text-gray-100 w-full" />
-
-            <!-- Boutons -->
-            <div class="flex justify-end space-x-4">
-                <button type="button" id="cancelEditClient"
-                        class="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600">Annuler</button>
-                <button type="submit"
-                        class="bg-teal-500 text-white px-4 py-2 rounded-md hover:bg-teal-600">Enregistrer</button>
-            </div>
-        </form>
-    </div>
-</div>
-
-<!-- Modale de suppression des clients -->
-
-<div id="deleteClientModal" class="modal hidden">
-    <div class="modal-content">
-        <h2 class="text-xl font-semibold text-gray-100 mb-4">Supprimer Client</h2>
-        <p class="text-gray-300">Êtes-vous sûr de vouloir supprimer ce client ?</p>
-        <div class="mt-6 flex justify-end space-x-4">
-            <button id="confirmDeleteClient" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">Supprimer</button>
-            <button id="cancelDeleteClient" class="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600">Annuler</button>
+      <h2 class="text-xl font-semibold text-gray-100 mb-4">Annuler la Réservation</h2>
+      <form id="cancelReservationForm">
+        <input type="hidden" id="reservationId" name="reservationId" />
+        <div class="space-y-4">
+          <label for="reason" class="block text-gray-300">Raison de l'annulation :</label>
+          <textarea id="reason" name="reason" rows="4" class="p-2 rounded-md bg-gray-700 text-gray-100 w-full" required></textarea>
         </div>
+        <div class="mt-6 flex justify-end space-x-4">
+          <button type="button" id="cancelCancelReservation" class="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600">Annuler</button>
+          <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">Confirmer l'annulation</button>
+        </div>
+      </form>
     </div>
-</div>
+  </div>
 
-<!-- Conteneur pour les notifications -->
-<div id="notification-container" class="fixed top-4 right-4 z-50"></div>
+  <!-- Modale de modification des clients -->
+  <div id="editClientModal" class="modal hidden">
+    <div class="modal-content">
+      <h2 class="text-xl font-semibold text-gray-100 mb-4">Modifier Client</h2>
+      <form id="editClientForm" class="space-y-4">
+        <input type="hidden" id="editClientEmail" name="email" />
+        <label for="editClientTelephone" class="block text-gray-300">Téléphone</label>
+        <input type="text" id="editClientTelephone" name="telephone" placeholder="Téléphone" required class="p-2 rounded-md bg-gray-700 text-gray-100 w-full" />
+        <label for="editClientCin" class="block text-gray-300">CIN</label>
+        <input type="text" id="editClientCin" name="cin" placeholder="CIN" required class="p-2 rounded-md bg-gray-700 text-gray-100 w-full" />
+        <label for="editClientNumeroPermis" class="block text-gray-300">Numéro de Permis</label>
+        <input type="text" id="editClientNumeroPermis" name="numeroPermis" placeholder="Numéro de Permis" required class="p-2 rounded-md bg-gray-700 text-gray-100 w-full" />
+        <div class="flex justify-end space-x-4">
+          <button type="button" id="cancelEditClient" class="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600">Annuler</button>
+          <button type="submit" class="bg-teal-500 text-white px-4 py-2 rounded-md hover:bg-teal-600">Enregistrer</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
-  <script src="admin.js"></script>
+  <!-- Modale de suppression des clients -->
+  <div id="deleteClientModal" class="modal hidden">
+    <div class="modal-content">
+      <h2 class="text-xl font-semibold text-gray-100 mb-4">Supprimer Client</h2>
+      <p class="text-gray-300">Êtes-vous sûr de vouloir supprimer ce client ?</p>
+      <div class="mt-6 flex justify-end space-x-4">
+        <button id="confirmDeleteClient" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">Supprimer</button>
+        <button id="cancelDeleteClient" class="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600">Annuler</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Conteneur pour les notifications -->
+  <div id="notification-container" class="fixed top-4 right-4 z-50"></div>
+
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-  // Fonction de recherche pour les véhicules
-  const searchVehicules = document.getElementById('searchVehicules');
-  if (searchVehicules) {
-    searchVehicules.addEventListener('input', function() {
-      const searchTerm = this.value.toLowerCase();
-      const rows = document.querySelectorAll('#vehiculesTableBody tr');
-      rows.forEach(row => {
-        const text = row.textContent.toLowerCase();
-        row.style.display = text.includes(searchTerm) ? '' : 'none';
-      });
-    });
-  }
+    // Fonction pour afficher/masquer les sections
+    function afficherSection(sectionId) {
+      const sections = document.querySelectorAll("main > section");
+      sections.forEach((section) => section.classList.add("hidden"));
 
-  // Fonction de recherche pour les réservations
-  const searchReservations = document.getElementById('searchReservations');
-  if (searchReservations) {
-    searchReservations.addEventListener('input', function() {
-      const searchTerm = this.value.toLowerCase();
-      const rows = document.querySelectorAll('#reservationsTableBody tr');
-      rows.forEach(row => {
-        const text = row.textContent.toLowerCase();
-        row.style.display = text.includes(searchTerm) ? '' : 'none';
-      });
-    });
-  }
-
-  // Fonction de recherche pour les clients
-  const searchClients = document.getElementById('searchClients');
-  if (searchClients) {
-    searchClients.addEventListener('input', function() {
-      const searchTerm = this.value.toLowerCase();
-      const rows = document.querySelectorAll('#clientsTableBody tr');
-      rows.forEach(row => {
-        const text = row.textContent.toLowerCase();
-        row.style.display = text.includes(searchTerm) ? '' : 'none';
-      });
-    });
-  }
-});
-// Fonction pour afficher/masquer les sections
-function afficherSection(sectionId) {
-    const sections = document.querySelectorAll("main > section");
-    sections.forEach((section) => section.classList.add("hidden"));
-
-    const sectionToShow = document.getElementById(sectionId);
-    if (sectionToShow) {
+      const sectionToShow = document.getElementById(sectionId);
+      if (sectionToShow) {
         sectionToShow.classList.remove("hidden");
-    } else {
+      } else {
         console.error(`Section avec l'ID "${sectionId}" non trouvée.`);
+      }
     }
-}
 
-// Fonction pour afficher une notification
-function afficherNotification(message, type) {
-    const container = document.getElementById("notification-container");
-    const notification = document.createElement("div");
-    notification.className = `notification p-4 rounded-md ${
+    // Fonction pour afficher une notification
+    function afficherNotification(message, type) {
+      const container = document.getElementById("notification-container");
+      const notification = document.createElement("div");
+      notification.className = `notification p-4 rounded-md ${
         type === "success" ? "bg-green-500" : "bg-red-500"
-    } text-white`;
-    notification.textContent = message;
+      } text-white`;
+      notification.textContent = message;
 
-    container.appendChild(notification);
+      container.appendChild(notification);
 
-    // Masquer et supprimer la notification après 3 secondes
-    setTimeout(() => {
+      // Masquer et supprimer la notification après 3 secondes
+      setTimeout(() => {
         notification.classList.add("hidden");
         setTimeout(() => notification.remove(), 500);
-    }, 3000);
-}
+      }, 3000);
+    }
 
-// Fonction pour charger les véhicules
-async function chargerVehicules() {
-    try {
+    // Fonction pour charger les véhicules
+    async function chargerVehicules() {
+      try {
         const response = await fetch('fetch_vehicules.php');
         const data = await response.json();
 
         if (data.status === 'success') {
-            const tbody = document.getElementById('vehiculesTableBody');
-            if (!tbody) {
-                console.error("Le corps du tableau des véhicules n'existe pas.");
-                return;
-            }
-            tbody.innerHTML = ''; // Vider le tableau
+          const tbody = document.getElementById('vehiculesTableBody');
+          if (!tbody) {
+            console.error("Le corps du tableau des véhicules n'existe pas.");
+            return;
+          }
+          tbody.innerHTML = ''; // Vider le tableau
 
-            data.data.forEach(vehicule => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td class="px-4 py-2">${vehicule.idVehicule}</td>
-                    <td class="px-4 py-2">${vehicule.marque}</td>
-                    <td class="px-4 py-2">${vehicule.modele}</td>
-                    <td class="px-4 py-2">${vehicule.type}</td>
-                    <td class="px-4 py-2">${vehicule.prixParJour} Mad</td>
-                    <td class="px-4 py-2">${vehicule.disponible ? 'Disponible' : 'Non disponible'}</td>
-                    <td class="px-4 py-2">${vehicule.nombrePlaces}</td>
-                    <td class="px-4 py-2">${vehicule.carburant}</td>
-                    <td class="px-4 py-2">
-                        <img src="uploads/${vehicule.image}" alt="${vehicule.marque} ${vehicule.modele}" class="w-16 h-10 object-cover rounded-md">
-                    </td>
-                    <td class="px-4 py-2">
-                        <button class="bg-blue-500 text-white px-2 py-1 rounded-md edit-btn" data-id="${vehicule.idVehicule}" data-marque="${vehicule.marque}" data-modele="${vehicule.modele}" data-type="${vehicule.type}" data-prix="${vehicule.prixParJour}" data-places="${vehicule.nombrePlaces}" data-carburant="${vehicule.carburant}" data-disponible="${vehicule.disponible}">Modifier</button>
-                        <button class="bg-red-500 text-white px-2 py-1 rounded-md delete-btn" data-id="${vehicule.idVehicule}">Supprimer</button>
-                    </td>
-                `;
-                tbody.appendChild(row);
-            });
+          data.data.forEach(vehicule => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td class="px-4 py-2">${vehicule.idVehicule}</td>
+              <td class="px-4 py-2">${vehicule.marque}</td>
+              <td class="px-4 py-2">${vehicule.modele}</td>
+              <td class="px-4 py-2">${vehicule.type}</td>
+              <td class="px-4 py-2">${vehicule.prixParJour} Mad</td>
+              <td class="px-4 py-2">${vehicule.disponible ? 'Disponible' : 'Non disponible'}</td>
+              <td class="px-4 py-2">${vehicule.nombrePlaces}</td>
+              <td class="px-4 py-2">${vehicule.carburant}</td>
+              <td class="px-4 py-2">
+                <img src="uploads/${vehicule.image}" alt="${vehicule.marque} ${vehicule.modele}" class="w-16 h-10 object-cover rounded-md">
+              </td>
+              <td class="px-4 py-2">
+                <button class="bg-blue-500 text-white px-2 py-1 rounded-md edit-btn" data-id="${vehicule.idVehicule}" data-marque="${vehicule.marque}" data-modele="${vehicule.modele}" data-type="${vehicule.type}" data-prix="${vehicule.prixParJour}" data-places="${vehicule.nombrePlaces}" data-carburant="${vehicule.carburant}" data-disponible="${vehicule.disponible}">Modifier</button>
+                <button class="bg-red-500 text-white px-2 py-1 rounded-md delete-btn" data-id="${vehicule.idVehicule}">Supprimer</button>
+              </td>
+            `;
+            tbody.appendChild(row);
+          });
+
+          // Déclencher la recherche après le chargement des données
+          const searchVehicules = document.getElementById('searchVehicules');
+          if (searchVehicules) {
+            searchVehicules.dispatchEvent(new Event('input'));
+          }
         } else {
-            console.error('Erreur:', data.message);
-            afficherNotification('Erreur lors du chargement des véhicules.', 'error');
+          console.error('Erreur:', data.message);
+          afficherNotification('Erreur lors du chargement des véhicules.', 'error');
         }
-    } catch (error) {
+      } catch (error) {
         console.error('Erreur:', error);
         afficherNotification('Erreur lors du chargement des véhicules.', 'error');
+      }
     }
-}
 
-// Fonction pour afficher la modale d'ajout
-function showAddModal() {
-    const addModal = document.getElementById('addModal');
-    if (addModal) {
+    // Fonction pour afficher la modale d'ajout
+    function showAddModal() {
+      const addModal = document.getElementById('addModal');
+      if (addModal) {
         addModal.style.display = 'flex';
         document.body.classList.add('modal-open');
-    } else {
+      } else {
         console.error("La modale d'ajout n'existe pas.");
+      }
     }
-}
 
-// Fonction pour cacher la modale d'ajout
-function hideAddModal() {
-    const addModal = document.getElementById('addModal');
-    if (addModal) {
+    // Fonction pour cacher la modale d'ajout
+    function hideAddModal() {
+      const addModal = document.getElementById('addModal');
+      if (addModal) {
         addModal.style.display = 'none';
         document.body.classList.remove('modal-open');
+      }
     }
-}
 
-// Écouteur d'événement pour annuler l'ajout
-document.getElementById('cancelAdd')?.addEventListener('click', hideAddModal);
+    // Écouteur d'événement pour annuler l'ajout
+    document.getElementById('cancelAdd')?.addEventListener('click', hideAddModal);
 
-// Écouteur d'événement pour le formulaire d'ajout
-document.getElementById('form-ajouter-vehicule')?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
+    // Écouteur d'événement pour le formulaire d'ajout
+    document.getElementById('form-ajouter-vehicule')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
 
-    try {
+      try {
         const response = await fetch('ajouter_vehicule.php', {
-            method: 'POST',
-            body: formData,
+          method: 'POST',
+          body: formData,
         });
         const data = await response.json();
 
         if (data.status === 'success') {
-            afficherNotification('Véhicule ajouté avec succès !', 'success');
-            e.target.reset();
-            chargerVehicules();
-            hideAddModal();
+          afficherNotification('Véhicule ajouté avec succès !', 'success');
+          e.target.reset();
+          chargerVehicules();
+          hideAddModal();
         } else {
-            afficherNotification('Veuillez saisir les champs corrects du véhicule.', 'error');
+          afficherNotification('Veuillez saisir les champs corrects du véhicule.', 'error');
         }
-    } catch (error) {
+      } catch (error) {
         console.error('Erreur:', error);
         afficherNotification('Erreur lors de l\'ajout du véhicule.', 'error');
-    }
-});
+      }
+    });
 
-// Variables pour stocker l'ID du véhicule à supprimer ou à modifier
-let vehicleIdToDelete = null;
-let vehicleIdToEdit = null;
+    // Variables pour stocker l'ID du véhicule à supprimer ou à modifier
+    let vehicleIdToDelete = null;
+    let vehicleIdToEdit = null;
 
-// Fonction pour afficher la modale de suppression
-function supprimerVehicule(id) {
-    vehicleIdToDelete = id;
-    const deleteModal = document.getElementById('deleteModal');
-    if (deleteModal) {
+    // Fonction pour afficher la modale de suppression
+    function supprimerVehicule(id) {
+      vehicleIdToDelete = id;
+      const deleteModal = document.getElementById('deleteModal');
+      if (deleteModal) {
         deleteModal.style.display = 'flex';
         document.body.classList.add('modal-open');
-    } else {
+      } else {
         console.error("La modale de suppression n'existe pas.");
+      }
     }
-}
 
-// Fonction pour cacher la modale de suppression
-function hideDeleteModal() {
-    const deleteModal = document.getElementById('deleteModal');
-    if (deleteModal) {
+    // Fonction pour cacher la modale de suppression
+    function hideDeleteModal() {
+      const deleteModal = document.getElementById('deleteModal');
+      if (deleteModal) {
         deleteModal.style.display = 'none';
         document.body.classList.remove('modal-open');
+      }
     }
-}
 
-// Fonction pour afficher la modale de modification
-function showEditModal(vehicle) {
-    vehicleIdToEdit = vehicle.idVehicule;
-    const editModal = document.getElementById('editModal');
-    if (editModal) {
+    // Fonction pour afficher la modale de modification
+    function showEditModal(vehicle) {
+      vehicleIdToEdit = vehicle.idVehicule;
+      const editModal = document.getElementById('editModal');
+      if (editModal) {
         document.getElementById('editId').value = vehicle.idVehicule;
         document.getElementById('editMarque').value = vehicle.marque;
         document.getElementById('editModele').value = vehicle.modele;
@@ -823,449 +762,496 @@ function showEditModal(vehicle) {
         document.getElementById('editDisponible').value = vehicle.disponible ? 'Disponible' : 'Non Disponible';
         editModal.style.display = 'flex';
         document.body.classList.add('modal-open');
-    } else {
+      } else {
         console.error("La modale de modification n'existe pas.");
+      }
     }
-}
 
-// Fonction pour cacher la modale de modification
-function hideEditModal() {
-    const editModal = document.getElementById('editModal');
-    if (editModal) {
+    // Fonction pour cacher la modale de modification
+    function hideEditModal() {
+      const editModal = document.getElementById('editModal');
+      if (editModal) {
         editModal.style.display = 'none';
         document.body.classList.remove('modal-open');
+      }
     }
-}
 
-// Écouteur d'événement pour annuler la suppression
-document.getElementById('cancelDelete')?.addEventListener('click', hideDeleteModal);
+    // Écouteur d'événement pour annuler la suppression
+    document.getElementById('cancelDelete')?.addEventListener('click', hideDeleteModal);
 
-// Écouteur d'événement pour annuler la modification
-document.getElementById('cancelEdit')?.addEventListener('click', hideEditModal);
+    // Écouteur d'événement pour annuler la modification
+    document.getElementById('cancelEdit')?.addEventListener('click', hideEditModal);
 
-// Écouteurs d'événements pour les boutons de suppression
-document.body.addEventListener('click', (e) => {
-    if (e.target.classList.contains('delete-btn')) {
+    // Écouteurs d'événements pour les boutons de suppression
+    document.body.addEventListener('click', (e) => {
+      if (e.target.classList.contains('delete-btn')) {
         supprimerVehicule(e.target.dataset.id);
-    }
-});
+      }
+    });
 
-// Écouteurs d'événements pour les boutons de modification
-document.body.addEventListener('click', (e) => {
-    if (e.target.classList.contains('edit-btn')) {
+    // Écouteurs d'événements pour les boutons de modification
+    document.body.addEventListener('click', (e) => {
+      if (e.target.classList.contains('edit-btn')) {
         const vehicle = {
-            idVehicule: e.target.dataset.id,
-            marque: e.target.dataset.marque,
-            modele: e.target.dataset.modele,
-            type: e.target.dataset.type,
-            prixParJour: e.target.dataset.prix,
-            nombrePlaces: e.target.dataset.places,
-            carburant: e.target.dataset.carburant,
-            disponible: e.target.dataset.disponible === 'true'
+          idVehicule: e.target.dataset.id,
+          marque: e.target.dataset.marque,
+          modele: e.target.dataset.modele,
+          type: e.target.dataset.type,
+          prixParJour: e.target.dataset.prix,
+          nombrePlaces: e.target.dataset.places,
+          carburant: e.target.dataset.carburant,
+          disponible: e.target.dataset.disponible === 'true'
         };
         showEditModal(vehicle);
-    }
-});
+      }
+    });
 
-// Écouteur d'événement pour le formulaire de modification
-document.getElementById('editVehicleForm')?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
+    // Écouteur d'événement pour le formulaire de modification
+    document.getElementById('editVehicleForm')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
 
-    try {
+      try {
         const response = await fetch('modifier_vehicule.php', {
-            method: 'POST',
-            body: formData,
+          method: 'POST',
+          body: formData,
         });
         const data = await response.json();
 
         if (data.status === 'success') {
-            afficherNotification('Véhicule modifié avec succès !', 'success');
-            chargerVehicules();
-            hideEditModal();
+          afficherNotification('Véhicule modifié avec succès !', 'success');
+          chargerVehicules();
+          hideEditModal();
         } else {
-            afficherNotification('Veuillez entrer des champs valides pour modifier le véhicule.', 'error');
-           
-
-            
+          afficherNotification('Veuillez entrer des champs valides pour modifier le véhicule.', 'error');
         }
-    } catch (error) {
+      } catch (error) {
         console.error('Erreur:', error);
         afficherNotification('Erreur lors de la modification du véhicule.', 'error');
+      }
+    });
 
-    }
-});
-
-// Écouteur d'événement pour confirmer la suppression
-document.getElementById('confirmDelete')?.addEventListener('click', async () => {
-    if (vehicleIdToDelete) {
+    // Écouteur d'événement pour confirmer la suppression
+    document.getElementById('confirmDelete')?.addEventListener('click', async () => {
+      if (vehicleIdToDelete) {
         try {
-            const response = await fetch('supprimer_vehicule.php', {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ id: vehicleIdToDelete }),
-            });
-            const data = await response.json();
+          const response = await fetch('supprimer_vehicule.php', {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id: vehicleIdToDelete }),
+          });
+          const data = await response.json();
 
-            if (data.status === 'success') {
-                afficherNotification('Véhicule supprimé avec succès !', 'success');
-                chargerVehicules();
-            } else {
-                afficherNotification('Erreur lors de la suppression du véhicule, car il est déjà réservé.', 'error');
-            }
-        } catch (error) {
-            console.error('Erreur:', error);
+          if (data.status === 'success') {
+            afficherNotification('Véhicule supprimé avec succès !', 'success');
+            chargerVehicules();
+          } else {
             afficherNotification('Erreur lors de la suppression du véhicule, car il est déjà réservé.', 'error');
+          }
+        } catch (error) {
+          console.error('Erreur:', error);
+          afficherNotification('Erreur lors de la suppression du véhicule, car il est déjà réservé.', 'error');
         }
         hideDeleteModal();
+      }
+    });
+
+    // Fonction pour activer le mode nuit
+    function enableDarkMode() {
+      document.body.classList.add('dark-mode');
+      document.getElementById('themeIcon')?.classList.remove('bx-moon');
+      document.getElementById('themeIcon')?.classList.add('bx-sun');
+      localStorage.setItem('theme', 'dark');
     }
-});
 
-// Fonction pour activer le mode nuit
-function enableDarkMode() {
-    document.body.classList.add('dark-mode');
-    document.getElementById('themeIcon')?.classList.remove('bx-moon');
-    document.getElementById('themeIcon')?.classList.add('bx-sun');
-    localStorage.setItem('theme', 'dark');
-}
+    // Fonction pour activer le mode clair
+    function enableLightMode() {
+      document.body.classList.remove('dark-mode');
+      document.getElementById('themeIcon')?.classList.remove('bx-sun');
+      document.getElementById('themeIcon')?.classList.add('bx-moon');
+      localStorage.setItem('theme', 'light');
+    }
 
-// Fonction pour activer le mode clair
-function enableLightMode() {
-    document.body.classList.remove('dark-mode');
-    document.getElementById('themeIcon')?.classList.remove('bx-sun');
-    document.getElementById('themeIcon')?.classList.add('bx-moon');
-    localStorage.setItem('theme', 'light');
-}
-
-// Vérifier la préférence de l'utilisateur au chargement de la page
-function loadTheme() {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
+    // Vérifier la préférence de l'utilisateur au chargement de la page
+    function loadTheme() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark') {
         enableDarkMode();
-    } else {
+      } else {
         enableLightMode();
+      }
     }
-}
 
-// Basculer entre les modes
-document.getElementById('toggleTheme')?.addEventListener('click', () => {
-    if (document.body.classList.contains('dark-mode')) {
+    // Basculer entre les modes
+    document.getElementById('toggleTheme')?.addEventListener('click', () => {
+      if (document.body.classList.contains('dark-mode')) {
         enableLightMode();
-    } else {
+      } else {
         enableDarkMode();
-    }
-});
+      }
+    });
 
-// Fonction pour charger les réservations
-async function chargerReservations() {
-    try {
+    // Fonction pour charger les réservations
+    async function chargerReservations() {
+      try {
         const response = await fetch('fetch_reservations.php');
         const data = await response.json();
 
         if (data.status === 'success') {
-            const tbody = document.getElementById('reservationsTableBody');
-            if (!tbody) {
-                console.error("Le corps du tableau des réservations n'existe pas.");
-                return;
-            }
-            tbody.innerHTML = ''; // Vider le tableau
+          const tbody = document.getElementById('reservationsTableBody');
+          if (!tbody) {
+            console.error("Le corps du tableau des réservations n'existe pas.");
+            return;
+          }
+          tbody.innerHTML = ''; // Vider le tableau
 
-            data.data.forEach(reservation => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td class="px-4 py-2">${reservation.idReservation}</td>
-                    <td class="px-4 py-2">${reservation.email || 'Non disponible'}</td>
-                    <td class="px-4 py-2">${reservation.marque || ''} ${reservation.modele || ''}</td>
-                    <td class="px-4 py-2">${reservation.dateDebut}  </td>
-                    <td class="px-4 py-2">${reservation.dateFin}  </td>
-                    <td class="px-4 py-2">${reservation.statut}</td>
-                    <td class="px-4 py-2">
-                        ${reservation.statut !== 'Confirmée' && reservation.statut !== 'Annulée' ? `
-                            <button onclick="confirmReservation(${reservation.idReservation})" class="bg-green-500 text-white px-2 py-1 rounded-md hover:bg-green-600">Confirmer</button>
-                            <button onclick="showCancelReservationModal(${reservation.idReservation})" class="bg-red-500 text-white px-2 py-1 rounded-md hover:bg-red-600">Annuler</button>
-                        ` : ''}
-                    </td>
-                `;
-                tbody.appendChild(row);
-            });
+          data.data.forEach(reservation => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td class="px-4 py-2">${reservation.idReservation}</td>
+              <td class="px-4 py-2">${reservation.email || 'Non disponible'}</td>
+              <td class="px-4 py-2">${reservation.marque || ''} ${reservation.modele || ''}</td>
+              <td class="px-4 py-2">${reservation.dateDebut}  </td>
+              <td class="px-4 py-2">${reservation.dateFin}  </td>
+              <td class="px-4 py-2">${reservation.statut}</td>
+              <td class="px-4 py-2">
+                ${reservation.statut !== 'Confirmée' && reservation.statut !== 'Annulée' ? `
+                  <button onclick="confirmReservation(${reservation.idReservation})" class="bg-green-500 text-white px-2 py-1 rounded-md hover:bg-green-600">Confirmer</button>
+                  <button onclick="showCancelReservationModal(${reservation.idReservation})" class="bg-red-500 text-white px-2 py-1 rounded-md hover:bg-red-600">Annuler</button>
+                ` : ''}
+              </td>
+            `;
+            tbody.appendChild(row);
+          });
+
+          // Déclencher la recherche après le chargement des données
+          const searchReservations = document.getElementById('searchReservations');
+          if (searchReservations) {
+            searchReservations.dispatchEvent(new Event('input'));
+          }
         } else {
-            console.error('Erreur du backend :', data.message);
+          console.error('Erreur du backend :', data.message);
         }
-    } catch (error) {
+      } catch (error) {
         console.error('Erreur lors de la récupération des réservations :', error);
+      }
     }
-}
 
-// Fonction pour confirmer une réservation
-async function confirmReservation(reservationId) {
-    try {
+    // Fonction pour confirmer une réservation
+    async function confirmReservation(reservationId) {
+      try {
         const response = await fetch('confirm_reservation.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ id: reservationId }),
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ id: reservationId }),
         });
         const data = await response.json();
 
         if (data.success) {
-            afficherNotification('Réservation confirmée avec succès', 'success');
-            chargerReservations(); // Recharger les réservations
+          afficherNotification('Réservation confirmée avec succès', 'success');
+          chargerReservations(); // Recharger les réservations
         } else {
-            afficherNotification('Erreur lors de la confirmation de la réservation', 'error');
+          afficherNotification('Erreur lors de la confirmation de la réservation', 'error');
         }
-    } catch (error) {
+      } catch (error) {
         console.error('Erreur :', error);
         afficherNotification('Erreur lors de la confirmation de la réservation', 'error');
+      }
     }
-}
 
-// Fonction pour afficher le modal d'annulation
-function showCancelReservationModal(reservationId) {
-    const cancelReservationModal = document.getElementById('cancelReservationModal');
-    if (cancelReservationModal) {
+    // Fonction pour afficher le modal d'annulation
+    function showCancelReservationModal(reservationId) {
+      const cancelReservationModal = document.getElementById('cancelReservationModal');
+      if (cancelReservationModal) {
         document.getElementById('reservationId').value = reservationId;
         cancelReservationModal.style.display = 'flex';
-    } else {
+      } else {
         console.error("Le modal d'annulation n'existe pas.");
+      }
     }
-}
 
-// Fonction pour annuler une réservation
-document.getElementById('cancelReservationForm')?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const reservationId = document.getElementById('reservationId').value;
-    const reason = document.getElementById('reason').value;
+    // Fonction pour annuler une réservation
+    document.getElementById('cancelReservationForm')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const reservationId = document.getElementById('reservationId').value;
+      const reason = document.getElementById('reason').value;
 
-    try {
+      try {
         const response = await fetch('cancel_reservation.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ id: reservationId, reason: reason }),
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ id: reservationId, reason: reason }),
         });
         const data = await response.json();
 
         if (data.success) {
-            afficherNotification('Réservation annulée avec succès', 'success');
-            chargerReservations(); // Recharger les réservations
-            document.getElementById('cancelReservationModal').style.display = 'none';
+          afficherNotification('Réservation annulée avec succès', 'success');
+          chargerReservations(); // Recharger les réservations
+          document.getElementById('cancelReservationModal').style.display = 'none';
         } else {
-            afficherNotification('Erreur lors de l\'annulation de la réservation', 'error');
+          afficherNotification('Erreur lors de l\'annulation de la réservation', 'error');
         }
-    } catch (error) {
+      } catch (error) {
         console.error('Erreur :', error);
         afficherNotification('Erreur lors de l\'annulation de la réservation', 'error');
-    }
-});
+      }
+    });
 
-// Fonction pour fermer le modal
-document.getElementById('cancelCancelReservation')?.addEventListener('click', () => {
-    const cancelReservationModal = document.getElementById('cancelReservationModal');
-    if (cancelReservationModal) {
+    // Fonction pour fermer le modal
+    document.getElementById('cancelCancelReservation')?.addEventListener('click', () => {
+      const cancelReservationModal = document.getElementById('cancelReservationModal');
+      if (cancelReservationModal) {
         cancelReservationModal.style.display = 'none';
-    }
-});
+      }
+    });
 
-// Fonction pour afficher le modal de confirmation de réservation
-function showConfirmReservationModal(reservationId) {
-    const confirmReservationModal = document.getElementById('confirmReservationModal');
-    if (confirmReservationModal) {
+    // Fonction pour afficher le modal de confirmation de réservation
+    function showConfirmReservationModal(reservationId) {
+      const confirmReservationModal = document.getElementById('confirmReservationModal');
+      if (confirmReservationModal) {
         confirmReservationModal.classList.remove('hidden');
         document.getElementById('confirmReservationButton').onclick = () => confirmReservation(reservationId);
-    } else {
+      } else {
         console.error("Le modal de confirmation de réservation n'existe pas.");
+      }
     }
-}
 
-// Fonction pour fermer le modal de confirmation de réservation
-document.getElementById('confirmCancelReservation')?.addEventListener('click', () => {
-    const confirmReservationModal = document.getElementById('confirmReservationModal');
-    if (confirmReservationModal) {
+    // Fonction pour fermer le modal de confirmation de réservation
+    document.getElementById('confirmCancelReservation')?.addEventListener('click', () => {
+      const confirmReservationModal = document.getElementById('confirmReservationModal');
+      if (confirmReservationModal) {
         confirmReservationModal.classList.add('hidden');
-    }
-});
+      }
+    });
 
-// GESTION DES CLIENTS
+    // GESTION DES CLIENTS
 
-// Fonction pour charger les clients depuis la base de données
-async function chargerClients() {
-    try {
+    // Fonction pour charger les clients depuis la base de données
+    async function chargerClients() {
+      try {
         const response = await fetch('fetch_clients.php');
         const data = await response.json();
 
         if (data.status === 'success') {
-            const tbody = document.getElementById('clientsTableBody');
-            if (!tbody) {
-                console.error("Le corps du tableau des clients n'existe pas.");
-                return;
-            }
-            tbody.innerHTML = ''; // Vider le tableau
+          const tbody = document.getElementById('clientsTableBody');
+          if (!tbody) {
+            console.error("Le corps du tableau des clients n'existe pas.");
+            return;
+          }
+          tbody.innerHTML = ''; // Vider le tableau
 
-            data.data.forEach(client => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td class="px-4 py-2">${client.email}</td>
-                    <td class="px-4 py-2">${client.telephone}</td>
-                    <td class="px-4 py-2">${client.cin}</td>
-                    <td class="px-4 py-2">${client.numeroPermis}</td>
-                    <td class="px-4 py-2">
-                        <button class="bg-blue-500 text-white px-2 py-1 rounded-md edit-client-btn" 
-                            data-email="${client.email}" 
-                            data-telephone="${client.telephone}" 
-                            data-cin="${client.cin}" 
-                            data-numero-permis="${client.numeroPermis}">
-                            Modifier
-                        </button>
-                        <button class="bg-red-500 text-white px-2 py-1 rounded-md delete-client-btn" 
-                            data-email="${client.email}">
-                            Supprimer
-                        </button>
-                    </td>
-                `;
-                tbody.appendChild(row);
-            });
+          data.data.forEach(client => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td class="px-4 py-2">${client.email}</td>
+              <td class="px-4 py-2">${client.telephone}</td>
+              <td class="px-4 py-2">${client.cin}</td>
+              <td class="px-4 py-2">${client.numeroPermis}</td>
+              <td class="px-4 py-2">
+                <button class="bg-blue-500 text-white px-2 py-1 rounded-md edit-client-btn" 
+                  data-email="${client.email}" 
+                  data-telephone="${client.telephone}" 
+                  data-cin="${client.cin}" 
+                  data-numero-permis="${client.numeroPermis}">
+                  Modifier
+                </button>
+                <button class="bg-red-500 text-white px-2 py-1 rounded-md delete-client-btn" 
+                  data-email="${client.email}">
+                  Supprimer
+                </button>
+              </td>
+            `;
+            tbody.appendChild(row);
+          });
+
+          // Déclencher la recherche après le chargement des données
+          const searchClients = document.getElementById('searchClients');
+          if (searchClients) {
+            searchClients.dispatchEvent(new Event('input'));
+          }
         } else {
-            console.error('Erreur:', data.message);
-            afficherNotification('Erreur lors du chargement des clients', 'error');
+          console.error('Erreur:', data.message);
+          afficherNotification('Erreur lors du chargement des clients', 'error');
         }
-    } catch (error) {
+      } catch (error) {
         console.error('Erreur lors du chargement des clients:', error);
         afficherNotification('Erreur lors du chargement des clients', 'error');
+      }
     }
-}
 
-// Fonction pour afficher la modale de modification des clients
-function showEditClientModal(client) {
-    document.getElementById('editClientEmail').value = client.email;
-    document.getElementById('editClientTelephone').value = client.telephone;
-    document.getElementById('editClientCin').value = client.cin;
-    document.getElementById('editClientNumeroPermis').value = client.numeroPermis;
-    document.getElementById('editClientModal').style.display = 'flex';
-    document.body.classList.add('modal-open');
-}
+    // Fonction pour afficher la modale de modification des clients
+    function showEditClientModal(client) {
+      document.getElementById('editClientEmail').value = client.email;
+      document.getElementById('editClientTelephone').value = client.telephone;
+      document.getElementById('editClientCin').value = client.cin;
+      document.getElementById('editClientNumeroPermis').value = client.numeroPermis;
+      document.getElementById('editClientModal').style.display = 'flex';
+      document.body.classList.add('modal-open');
+    }
 
-// Fonction pour masquer la modale de modification des clients
-function hideEditClientModal() {
-    document.getElementById('editClientModal').style.display = 'none';
-    document.body.classList.remove('modal-open');
-}
+    // Fonction pour masquer la modale de modification des clients
+    function hideEditClientModal() {
+      document.getElementById('editClientModal').style.display = 'none';
+      document.body.classList.remove('modal-open');
+    }
 
-// Fonction pour afficher la modale de suppression des clients
-function showDeleteClientModal(email) {
-    document.getElementById('deleteClientModal').style.display = 'flex';
-    document.body.classList.add('modal-open');
-    document.getElementById('confirmDeleteClient').dataset.email = email;
-}
+    // Fonction pour afficher la modale de suppression des clients
+    function showDeleteClientModal(email) {
+      document.getElementById('deleteClientModal').style.display = 'flex';
+      document.body.classList.add('modal-open');
+      document.getElementById('confirmDeleteClient').dataset.email = email;
+    }
 
-// Fonction pour masquer la modale de suppression des clients
-function hideDeleteClientModal() {
-    document.getElementById('deleteClientModal').style.display = 'none';
-    document.body.classList.remove('modal-open');
-}
+    // Fonction pour masquer la modale de suppression des clients
+    function hideDeleteClientModal() {
+      document.getElementById('deleteClientModal').style.display = 'none';
+      document.body.classList.remove('modal-open');
+    }
 
-// Écouteur d'événement pour les boutons de modification des clients
-document.body.addEventListener('click', (e) => {
-    if (e.target.classList.contains('edit-client-btn')) {
+    // Écouteur d'événement pour les boutons de modification des clients
+    document.body.addEventListener('click', (e) => {
+      if (e.target.classList.contains('edit-client-btn')) {
         const client = {
-            email: e.target.dataset.email,
-            telephone: e.target.dataset.telephone,
-            cin: e.target.dataset.cin,
-            numeroPermis: e.target.dataset.numeroPermis
+          email: e.target.dataset.email,
+          telephone: e.target.dataset.telephone,
+          cin: e.target.dataset.cin,
+          numeroPermis: e.target.dataset.numeroPermis
         };
         showEditClientModal(client);
-    }
-});
+      }
+    });
 
-// Écouteur d'événement pour les boutons de suppression des clients
-document.body.addEventListener('click', (e) => {
-    if (e.target.classList.contains('delete-client-btn')) {
+    // Écouteur d'événement pour les boutons de suppression des clients
+    document.body.addEventListener('click', (e) => {
+      if (e.target.classList.contains('delete-client-btn')) {
         const email = e.target.dataset.email;
         showDeleteClientModal(email);
-    }
-});
+      }
+    });
 
-// Écouteur d'événement pour annuler la modification des clients
-document.getElementById('cancelEditClient')?.addEventListener('click', hideEditClientModal);
+    // Écouteur d'événement pour annuler la modification des clients
+    document.getElementById('cancelEditClient')?.addEventListener('click', hideEditClientModal);
 
-// Écouteur d'événement pour annuler la suppression des clients
-document.getElementById('cancelDeleteClient')?.addEventListener('click', hideDeleteClientModal);
+    // Écouteur d'événement pour annuler la suppression des clients
+    document.getElementById('cancelDeleteClient')?.addEventListener('click', hideDeleteClientModal);
 
-// Écouteur d'événement pour le formulaire de modification des clients
-document.getElementById('editClientForm')?.addEventListener('submit', async (e) => {
-    e.preventDefault();
+    // Écouteur d'événement pour le formulaire de modification des clients
+    document.getElementById('editClientForm')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
 
-    const formData = {
+      const formData = {
         email: document.getElementById('editClientEmail').value,
         telephone: document.getElementById('editClientTelephone').value,
         cin: document.getElementById('editClientCin').value,
         numeroPermis: document.getElementById('editClientNumeroPermis').value
-    };
+      };
 
-    try {
+      try {
         const response = await fetch('modifier_client.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
         });
         const data = await response.json();
 
         if (data.status === 'success') {
-            afficherNotification('Client modifié avec succès !', 'success');
-            chargerClients(); // Rafraîchir la liste des clients
-            hideEditClientModal();
+          afficherNotification('Client modifié avec succès !', 'success');
+          chargerClients(); // Rafraîchir la liste des clients
+          hideEditClientModal();
         } else {
-            afficherNotification('Erreur : ' + data.message, 'error');
+          afficherNotification('Erreur : ' + data.message, 'error');
         }
-    } catch (error) {
+      } catch (error) {
         console.error('Erreur:', error);
         afficherNotification('Erreur lors de la modification du client.', 'error');
-    }
-});
+      }
+    });
 
-// Écouteur d'événement pour confirmer la suppression des clients
-document.getElementById('confirmDeleteClient')?.addEventListener('click', async () => {
-    const email = document.getElementById('confirmDeleteClient').dataset.email;
+    // Écouteur d'événement pour confirmer la suppression des clients
+    document.getElementById('confirmDeleteClient')?.addEventListener('click', async () => {
+      const email = document.getElementById('confirmDeleteClient').dataset.email;
 
-    if (email) {
+      if (email) {
         try {
-            const response = await fetch('supprimer_client.php', {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email: email }),
-            });
-            const data = await response.json();
+          const response = await fetch('supprimer_client.php', {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email: email }),
+          });
+          const data = await response.json();
 
-            if (data.status === 'success') {
-                afficherNotification('Client supprimé avec succès !', 'success');
-                chargerClients(); // Rafraîchir la liste des clients
-            } else {
-                afficherNotification(data.message, 'error');
-            }
+          if (data.status === 'success') {
+            afficherNotification('Client supprimé avec succès !', 'success');
+            chargerClients(); // Rafraîchir la liste des clients
+          } else {
+            afficherNotification(data.message, 'error');
+          }
         } catch (error) {
-            console.error('Erreur:', error);
-            afficherNotification('Erreur lors de la suppression du client.', 'error');
+          console.error('Erreur:', error);
+          afficherNotification('Erreur lors de la suppression du client.', 'error');
         }
         hideDeleteClientModal();
-    }
-});
+      }
+    });
 
-// Charger le thème et les données au démarrage
-window.onload = () => {
-    loadTheme();
-    chargerVehicules();
-    chargerReservations();
-    afficherSection('dashboard'); // Afficher le tableau de bord par défaut
-    chargerClients();
-};
+    // Fonction pour activer la recherche après le chargement des données
+    function activerRecherche() {
+      const searchVehicules = document.getElementById('searchVehicules');
+      if (searchVehicules) {
+        searchVehicules.addEventListener('input', function() {
+          const searchTerm = this.value.toLowerCase();
+          const rows = document.querySelectorAll('#vehiculesTableBody tr');
+          rows.forEach(row => {
+            const text = row.textContent.toLowerCase();
+            row.style.display = text.includes(searchTerm) ? '' : 'none';
+          });
+        });
+      }
+
+      const searchReservations = document.getElementById('searchReservations');
+      if (searchReservations) {
+        searchReservations.addEventListener('input', function() {
+          const searchTerm = this.value.toLowerCase();
+          const rows = document.querySelectorAll('#reservationsTableBody tr');
+          rows.forEach(row => {
+            const text = row.textContent.toLowerCase();
+            row.style.display = text.includes(searchTerm) ? '' : 'none';
+          });
+        });
+      }
+
+      const searchClients = document.getElementById('searchClients');
+      if (searchClients) {
+        searchClients.addEventListener('input', function() {
+          const searchTerm = this.value.toLowerCase();
+          const rows = document.querySelectorAll('#clientsTableBody tr');
+          rows.forEach(row => {
+            const text = row.textContent.toLowerCase();
+            row.style.display = text.includes(searchTerm) ? '' : 'none';
+          });
+        });
+      }
+    }
+
+    // Charger le thème et les données au démarrage
+    window.onload = () => {
+      loadTheme();
+      chargerVehicules();
+      chargerReservations();
+      afficherSection('dashboard'); // Afficher le tableau de bord par défaut
+      chargerClients();
+      activerRecherche(); // Activer la recherche après le chargement des données
+    };
   </script>
-  
 </body>
 </html>
