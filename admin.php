@@ -24,6 +24,61 @@ try {
   $stmt_clients = $pdo->query($sql_clients);
   $row_clients = $stmt_clients->fetch(PDO::FETCH_ASSOC);
   $total_clients = $row_clients['total_clients'];
+
+  // Récupérer les données pour le diagramme
+  $sql_reservations = "
+    SELECT 
+      DATE_FORMAT(dateHeureDebut, '%Y-%m') AS mois,
+      statut,
+      COUNT(*) AS count
+    FROM reservation
+    GROUP BY mois, statut
+    ORDER BY mois
+  ";
+  $stmt_reservations = $pdo->query($sql_reservations);
+  $reservationsData = $stmt_reservations->fetchAll(PDO::FETCH_ASSOC);
+
+  // Organiser les données pour le graphique
+  $labels = [];
+  $data = [
+    'Confirmée' => [],
+    'En attente' => [],
+    'Annulée' => []
+  ];
+
+  // Initialiser les mois
+  $all_months = [];
+  $current_date = new DateTime('2025-01-01'); // Remplacez par la date de début de vos données
+  $end_date = new DateTime('2025-12-31'); // Remplacez par la date de fin de vos données
+
+  while ($current_date <= $end_date) {
+    $month = $current_date->format('Y-m');
+    $all_months[] = $month;
+    $current_date->modify('+1 month');
+  }
+
+  // Remplir les données pour chaque mois
+  foreach ($all_months as $month) {
+    $labels[] = $month;
+    foreach ($data as $statut => &$values) {
+      $values[] = 0; // Initialiser à 0 pour chaque mois
+    }
+  }
+
+  // Remplir les données réelles
+  foreach ($reservationsData as $row) {
+    $month = $row['mois'];
+    $statut = $row['statut'];
+    $count = $row['count'];
+
+    if (isset($data[$statut])) {
+      $index = array_search($month, $labels);
+      if ($index !== false) {
+        $data[$statut][$index] = $count;
+      }
+    }
+  }
+
 } catch (PDOException $e) {
   die("Erreur de connexion à la base de données : " . $e->getMessage());
 }
@@ -37,10 +92,37 @@ try {
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
   <title>Tableau de Bord - Location de Véhicules</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Itim&display=swap");
     body {
       font-family: "Itim", cursive;
+    }
+    .dashboard-card {
+      background-color: #ffffff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .dashboard-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+    .dashboard-card i {
+      font-size: 2rem;
+      color: #4fd1c5;
+    }
+    .dashboard-card span {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #2d3748;
+    }
+    .dashboard-card .count {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #4fd1c5;
     }
     .notification {
       opacity: 1;
@@ -349,6 +431,9 @@ try {
             </div>
             <span class="count"><?php echo htmlspecialchars($total_clients); ?></span>
           </div>
+        </div>
+        <div class="dashboard-card">
+          <canvas id="reservationsChart"></canvas>
         </div>
       </section>
 
@@ -1245,6 +1330,76 @@ try {
 
     // Charger le thème et les données au démarrage
     window.onload = () => {
+      loadTheme();
+      chargerVehicules();
+      chargerReservations();
+      afficherSection('dashboard'); // Afficher le tableau de bord par défaut
+      chargerClients();
+      activerRecherche(); // Activer la recherche après le chargement des données
+    };
+    const reservationsData = {
+      labels: <?php echo json_encode($labels); ?>,
+      datasets: [
+        {
+          label: 'Confirmée',
+          data: <?php echo json_encode($data['Confirmée']); ?>,
+          borderColor: '#4fd1c5',
+          backgroundColor: 'rgba(79, 209, 197, 0.2)',
+          fill: false,
+        },
+        {
+          label: 'En attente',
+          data: <?php echo json_encode($data['En attente']); ?>,
+          borderColor: '#4299e1',
+          backgroundColor: 'rgba(66, 153, 225, 0.2)',
+          fill: false,
+        },
+        {
+          label: 'Annulée',
+          data: <?php echo json_encode($data['Annulée']); ?>,
+          borderColor: '#e53e3e',
+          backgroundColor: 'rgba(229, 62, 62, 0.2)',
+          fill: false,
+        }
+      ]
+    };
+
+    // Configuration du graphique
+    const reservationsChart = new Chart(document.getElementById('reservationsChart'), {
+      type: 'line',
+      data: reservationsData,
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          title: {
+            display: true,
+            text: 'Réservations par Mois et par Statut'
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: 'Mois'
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: 'Nombre de Réservations'
+            },
+            beginAtZero: true
+          }
+        }
+      },
+    });
+
+    // Afficher le tableau de bord par défaut
+    window.onload = () => {
+      afficherSection('dashboard');
       loadTheme();
       chargerVehicules();
       chargerReservations();
