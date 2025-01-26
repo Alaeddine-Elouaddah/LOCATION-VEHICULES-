@@ -20,7 +20,8 @@ try {
             v.modele, 
             r.dateHeureDebut AS dateDebut, 
             r.dateHeureFin AS dateFin, 
-            r.statut
+            r.montantTotal
+            ,r.statut
         FROM reservation r
         JOIN utilisateur u ON r.clientId = u.id
         JOIN vehicule v ON r.vehiculeId = v.idVehicule
