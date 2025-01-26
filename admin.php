@@ -481,6 +481,7 @@ try {
               <th class="px-4 py-2 text-left">Véhicule</th>
               <th class="px-4 py-2 text-left">Date et heure de début</th>
               <th class="px-4 py-2 text-left">Date et heure de fin</th>
+              <th class="px-4 py-2 text-left">Montant total</th>
               <th class="px-4 py-2 text-left">Statut</th>
               <th class="px-4 py-2 text-left">Actions</th>
             </tr>
@@ -729,7 +730,7 @@ try {
               <td class="px-4 py-2">${vehicule.modele}</td>
               <td class="px-4 py-2">${vehicule.type}</td>
               <td class="px-4 py-2">${vehicule.prixParJour} Mad</td>
-              <td class="px-4 py-2">${vehicule.disponible ? 'Disponible' : 'Non disponible'}</td>
+              <td class="px-4 py-2">${vehicule.disponible}</td>
               <td class="px-4 py-2">${vehicule.nombrePlaces}</td>
               <td class="px-4 py-2">${vehicule.carburant}</td>
               <td class="px-4 py-2">
@@ -999,8 +1000,10 @@ try {
               <td class="px-4 py-2">${reservation.email || 'Non disponible'}</td>
               <td class="px-4 py-2">${reservation.marque || ''} ${reservation.modele || ''}</td>
               <td class="px-4 py-2">${reservation.dateDebut}  </td>
-              <td class="px-4 py-2">${reservation.dateFin}  </td>
-              <td class="px-4 py-2">${reservation.statut}</td>
+              <td class="px-4 py-2">${reservation.dateFin}   </td>
+               <td class="px-4 py-2">${reservation.montantTotal} Mad </td>
+             
+               <td class="px-4 py-2">${reservation.statut}</td>
               <td class="px-4 py-2">
                 ${reservation.statut !== 'Confirmée' && reservation.statut !== 'Annulée' ? `
                   <button onclick="confirmReservation(${reservation.idReservation})" class="bg-green-500 text-white px-2 py-1 rounded-md hover:bg-green-600">Confirmer</button>
