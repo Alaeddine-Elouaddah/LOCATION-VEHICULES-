@@ -415,44 +415,56 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </section>
 
       <!-- Section Mes Réservations -->
-      <section id="reservations" class="hidden p-4 space-y-6 bg-white flex flex-col rounded-lg shadow-md">
-        <h1 class="text-2xl font-semibold text-gray-900 mb-6">Mes Réservations</h1>
-        <table class="w-full bg-white rounded-md overflow-hidden">
-          <thead>
-            <tr>
-              <th class="px-4 py-2 text-left">ID</th>
-              <th class="px-4 py-2 text-left">Véhicule</th>
-              <th class="px-4 py-2 text-left">Date de début</th>
-              <th class="px-4 py-2 text-left">Date de fin</th>
-              <th class="px-4 py-2 text-left">Montant Total</th>
-              <th class="px-4 py-2 text-left">Statut</th>
-              <th class="px-4 py-2 text-left">Actions</th>
+      <section id="reservations" class="hidden p-6 bg-white rounded-lg shadow-md">
+  <h1 class="text-2xl font-semibold text-gray-800 mb-6">Mes Réservations</h1>
+  <div class="overflow-x-auto">
+    <table class="w-full bg-white rounded-lg overflow-hidden">
+      <thead class="bg-gray-50">
+        <tr>
+          <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">ID</th>
+          <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Véhicule</th>
+          <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Date de début</th>
+          <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Date de fin</th>
+          <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Montant Total</th>
+          <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Statut</th>
+          <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Actions</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-100">
+        <?php if (!empty($reservations)): ?>
+          <?php foreach ($reservations as $reservation): ?>
+            <tr id="reservation-<?php echo $reservation['idReservation']; ?>" class="hover:bg-gray-50 transition-colors duration-200">
+              <td class="px-6 py-4 text-sm text-gray-700"><?php echo htmlspecialchars($reservation['idReservation']); ?></td>
+              <td class="px-6 py-4 text-sm text-gray-700"><?php echo htmlspecialchars($reservation['marque'] . ' ' . $reservation['modele']); ?></td>
+              <td class="px-6 py-4 text-sm text-gray-700"><?php echo date('d/m/Y H:i', strtotime($reservation['dateHeureDebut'])); ?></td>
+              <td class="px-6 py-4 text-sm text-gray-700"><?php echo date('d/m/Y H:i', strtotime($reservation['dateHeureFin'])); ?></td>
+              <td class="px-6 py-4 text-sm text-gray-700"><?php echo htmlspecialchars($reservation['montantTotal']); ?> Mad</td>
+              <td class="px-6 py-4 text-sm text-gray-700"><?php echo htmlspecialchars($reservation['statut']); ?></td>
+              <td class="px-6 py-4 text-sm">
+                <button
+                  onclick="annulerReservation(<?php echo $reservation['idReservation']; ?>)"
+                  class="bg-red-500 text-white px-3 py-1.5 rounded-md hover:bg-red-600 transition-colors duration-200"
+                >
+                  Annuler
+                </button>
+                <button
+                  onclick="modifierReservation(<?php echo $reservation['idReservation']; ?>)"
+                  class="bg-yellow-500 text-white px-3 py-1.5 rounded-md hover:bg-yellow-600 transition-colors duration-200"
+                >
+                  Modifier
+                </button>
+              </td>
             </tr>
-          </thead>
-          <tbody id="reservationsTableBody">
-            <?php if (!empty($reservations)): ?>
-              <?php foreach ($reservations as $reservation): ?>
-                <tr id="reservation-<?php echo $reservation['idReservation']; ?>">
-                  <td class="px-4 py-2"><?php echo htmlspecialchars($reservation['idReservation']); ?></td>
-                  <td class="px-4 py-2"><?php echo htmlspecialchars($reservation['marque'] . ' ' . $reservation['modele']); ?></td>
-                  <td class="px-4 py-2"><?php echo date('d/m/Y H:i', strtotime($reservation['dateHeureDebut'])); ?></td>
-                  <td class="px-4 py-2"><?php echo date('d/m/Y H:i', strtotime($reservation['dateHeureFin'])); ?></td>
-                  <td class="px-4 py-2"><?php echo htmlspecialchars($reservation['montantTotal']); ?> Mad</td>
-                  <td class="px-4 py-2"><?php echo htmlspecialchars($reservation['statut']); ?></td>
-                  <td class="px-4 py-2">
-                    <button onclick="annulerReservation(<?php echo $reservation['idReservation']; ?>)" class="bg-red-500 text-white px-2 py-1 rounded-md hover:bg-red-600">Annuler</button>
-                    <button onclick="modifierReservation(<?php echo $reservation['idReservation']; ?>)" class="bg-yellow-500 text-white px-2 py-1 rounded-md hover:bg-yellow-600">Modifier</button>
-                  </td>
-                </tr>
-              <?php endforeach; ?>
-            <?php else: ?>
-              <tr>
-                <td colspan="7" class="px-4 py-2 text-center">Aucune réservation trouvée.</td>
-              </tr>
-            <?php endif; ?>
-          </tbody>
-        </table>
-      </section>
+          <?php endforeach; ?>
+        <?php else: ?>
+          <tr>
+            <td colspan="7" class="px-6 py-4 text-sm text-center text-gray-500">Aucune réservation trouvée.</td>
+          </tr>
+        <?php endif; ?>
+      </tbody>
+    </table>
+  </div>
+</section>
     </main>
   </div>
 
@@ -544,12 +556,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   <!-- Modale de modification de réservation -->
   <div id="modifyReservationModal" class="modal hidden">
-    <div class="modal-content">
-      <h2 class="text-xl font-semibold text-gray-100 mb-4">Modifier la Réservation</h2>
+  <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-lg shadow-lg w-full max-w-md p-6">
+      <!-- Titre du modal -->
+      <h2 class="text-2xl font-bold text-gray-800 mb-6">Modifier la Réservation</h2>
+
+      <!-- Formulaire de modification -->
       <form id="modifyReservationForm">
         <input type="hidden" id="modifyReservationId" name="modifyReservationId" />
-        <div class="mb-4">
-          <label for="newDateHeureDebut" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+
+        <!-- Champ pour la nouvelle date et heure de début -->
+        <div class="mb-6">
+          <label for="newDateHeureDebut" class="block text-sm font-medium text-gray-700 mb-2">
             Nouvelle date et heure de début
           </label>
           <input
@@ -557,11 +575,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             id="newDateHeureDebut"
             name="newDateHeureDebut"
             required
-            class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
-        <div class="mb-4">
-          <label for="newDateHeureFin" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+
+        <!-- Champ pour la nouvelle date et heure de fin -->
+        <div class="mb-6">
+          <label for="newDateHeureFin" class="block text-sm font-medium text-gray-700 mb-2">
             Nouvelle date et heure de fin
           </label>
           <input
@@ -569,11 +589,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             id="newDateHeureFin"
             name="newDateHeureFin"
             required
-            class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
-        <div class="mb-4">
-          <label for="newMontantTotal" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+
+        <!-- Champ pour le nouveau montant total -->
+        <div class="mb-6">
+          <label for="newMontantTotal" class="block text-sm font-medium text-gray-700 mb-2">
             Nouveau montant total
           </label>
           <input
@@ -581,16 +603,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             id="newMontantTotal"
             name="newMontantTotal"
             readonly
-            class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            class="w-full p-3 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
-        <div class="mt-6 flex justify-end space-x-4">
-          <button type="button" id="cancelModifyReservation" class="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600">Annuler</button>
-          <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Confirmer la modification</button>
+
+        <!-- Boutons d'action -->
+        <div class="flex justify-end space-x-4">
+          <button
+            type="button"
+            id="cancelModifyReservation"
+            class="px-6 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500"
+          >
+            Annuler
+          </button>
+          <button
+            type="submit"
+            class="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            Confirmer
+          </button>
         </div>
       </form>
     </div>
   </div>
+</div>
   <script>
 // Fonction pour afficher des notifications
 function afficherNotification(message, type) {
