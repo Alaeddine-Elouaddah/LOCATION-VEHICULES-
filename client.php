@@ -17,7 +17,7 @@ $stmtNotifications->execute([$userId]);
 $notifications = $stmtNotifications->fetchAll(PDO::FETCH_ASSOC);
 
 // Récupérer les véhicules disponibles
-$sqlVehicules = "SELECT * FROM vehicule";
+$sqlVehicules = "SELECT  * FROM vehicule";
 $stmtVehicules = $pdo->query($sqlVehicules);
 $vehicules = $stmtVehicules->fetchAll(PDO::FETCH_ASSOC);
 
@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Vérifier si le véhicule est déjà réservé pour ces dates
         $sqlCheck = "SELECT * FROM reservation 
-                     WHERE vehiculeId = ? 
+                     WHERE vehiculeId = ?  AND statut !='Annulée'
                      AND ((dateHeureDebut <= ? AND dateHeureFin >= ?) 
                      OR (dateHeureDebut <= ? AND dateHeureFin >= ?) 
                      OR (dateHeureDebut >= ? AND dateHeureFin <= ?))";
@@ -393,26 +393,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <main class="flex-1 bg-gray-100 flex flex-col gap-4 ml-0 lg:ml-42">
       <!-- Section Véhicules Disponibles -->
       <section id="vehicules" class="p-4 space-y-6 bg-white flex flex-col rounded-lg shadow-md">
-        <h1 class="text-2xl font-semibold text-gray-900 mb-6">Véhicules Disponibles</h1>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <?php if (!empty($vehicules)): ?>
-            <?php foreach ($vehicules as $vehicule): ?>
-              <div class="vehicle-card">
-                <img src="uploads/<?php echo htmlspecialchars($vehicule['image']); ?>" />
-                <h3 class="mt-4"><?php echo htmlspecialchars($vehicule['marque'] . ' ' . $vehicule['modele']); ?></h3>
-                <p class="mt-2"><i class="bx bx-car"></i> Type: <?php echo htmlspecialchars($vehicule['type']); ?></p>
-                <p class="mt-2"><i class="bx bx-money"></i> Prix par jour: <?php echo htmlspecialchars($vehicule['prixParJour']); ?> Mad </p>
-                <p class="mt-2"><i class="bx bx-user"></i> Places: <?php echo htmlspecialchars($vehicule['nombrePlaces']); ?></p>
-                <p class="mt-2"><i class="bx bx-gas-pump"></i> Carburant: <?php echo htmlspecialchars($vehicule['carburant']); ?></p>
-                <p class="mt-2"><i class="bx bx-calendar"></i> Statut: <?php echo htmlspecialchars($vehicule['disponible']); ?></p>
-                <button onclick="openModal(<?php echo $vehicule['idVehicule']; ?>, <?php echo $vehicule['prixParJour']; ?>, <?php echo htmlspecialchars(json_encode($vehicule['reservedDates'])); ?>)" class="bg-blue-500 text-white p-2 rounded mt-4 w-full">Réserver</button>
-              </div>
-            <?php endforeach; ?>
-          <?php else: ?>
-            <p class="text-gray-700">Aucun véhicule disponible pour le moment.</p>
-          <?php endif; ?>
-        </div>
-      </section>
+    <h1 class="text-2xl font-semibold text-gray-900 mb-6">Véhicules Disponibles</h1>
+    <div id="vehicules-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Les véhicules seront insérés ici dynamiquement -->
+    </div>
+</section>
 
       <!-- Section Mes Réservations -->
       <section id="reservations" class="hidden p-6 bg-white rounded-lg shadow-md">
@@ -628,14 +613,58 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </div>
 </div>
   <script>
+    document.addEventListener('DOMContentLoaded', function () {
+    fetch('fetch_vehicules.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                const vehiculesContainer = document.getElementById('vehicules-container');
+                vehiculesContainer.innerHTML = ''; // Vider le conteneur avant d'ajouter de nouveaux éléments
+
+                data.data.forEach(vehicule => {
+                    const vehiculeCard = document.createElement('div');
+                    vehiculeCard.className = 'vehicle-card';
+
+                    vehiculeCard.innerHTML = `
+                        <img src="uploads/${vehicule.image}" />
+                        <h3 class="mt-4">${vehicule.marque} ${vehicule.modele}</h3>
+                        <p class="mt-2"><i class="bx bx-car"></i> Type: ${vehicule.type}</p>
+                        <p class="mt-2"><i class="bx bx-money"></i> Prix par jour: ${vehicule.prixParJour} Mad</p>
+                        <p class="mt-2"><i class="bx bx-user"></i> Places: ${vehicule.nombrePlaces}</p>
+                        <p class="mt-2"><i class="bx bx-gas-pump"></i> Carburant: ${vehicule.carburant}</p>
+                        <p class="mt-2"><i class="bx bx-calendar"></i> Statut: ${vehicule.disponible}</p>
+                      <button onclick="openModal(<?php echo $vehicule['idVehicule']; ?>, <?php echo $vehicule['prixParJour']; ?>, <?php echo htmlspecialchars(json_encode($vehicule['reservedDates'])); ?>)" class="bg-blue-500 text-white p-2 rounded mt-4 w-full">Réserver</button>
+                    `;
+
+                    vehiculesContainer.appendChild(vehiculeCard);
+                });
+            } else {
+                console.error('Erreur lors de la récupération des véhicules:', data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Erreur réseau:', error);
+        });
+});
 // Fonction pour afficher des notifications
 function afficherNotification(message, type) {
     const container = document.getElementById("notification-container");
     const notification = document.createElement("div");
     notification.className = `notification p-4 rounded-md ${
         type === "success" ? "bg-green-500" : "bg-red-500"
-    } text-white`;
-    notification.textContent = message;
+    } text-white flex items-center`;
+
+    // Ajouter une icône si le type est "success"
+    if (type === "success") {
+        const icon = document.createElement("i");
+        icon.className = "fas fa-check-circle mr-2"; // Icône de succès de FontAwesome
+        notification.appendChild(icon);
+    }
+
+    // Ajouter le message
+    const messageText = document.createElement("span");
+    messageText.textContent = message;
+    notification.appendChild(messageText);
 
     container.appendChild(notification);
 
@@ -645,7 +674,6 @@ function afficherNotification(message, type) {
         setTimeout(() => notification.remove(), 500);
     }, 3000);
 }
-
 // Fonction pour afficher ou masquer les sections
 function afficherSection(sectionId) {
     const sections = document.querySelectorAll('main section');
@@ -995,6 +1023,5 @@ document.getElementById('modifyReservationForm').onsubmit = async function (e) {
     }
 };
 </script>
- 
 </body>
 </html>
