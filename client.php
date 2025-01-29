@@ -1,3 +1,5 @@
+
+
 <?php
 session_start();
 include('db.php'); // Assurez-vous que ce fichier contient la connexion à la base de données
@@ -9,17 +11,7 @@ if (!isset($_SESSION['user'])) {
 }
 
 $userId = $_SESSION['user']['id']; // Récupérer l'ID de l'utilisateur connecté
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $data = json_decode(file_get_contents('php://input'), true);
-  $notificationId = $data['notificationId']; // Assurez-vous que c'est bien 'notificationId' et non 'idNotification'
 
-  $sql = "UPDATE notification SET lu = TRUE WHERE idNotification = ?";
-  $stmt = $pdo->prepare($sql);
-  $stmt->execute([$notificationId]);
-
-  echo json_encode(['success' => true]);
-  exit;
-}
 // Récupérer les notifications de l'utilisateur
 $sqlNotifications = "SELECT * FROM notification WHERE clientId = ? AND lu = FALSE ORDER BY dateEnvoi DESC";
 $stmtNotifications = $pdo->prepare($sqlNotifications);
@@ -115,7 +107,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo json_encode(['success' => true]);
         exit;
     }
-
+    if (!isset($data['notificationId']) || !is_numeric($data['notificationId'])) {
+      $data = json_decode(file_get_contents('php://input'), true);
+      $notificationId = $data['notificationId']; // Assurez-vous que c'est bien 'notificationId' et non 'idNotification'
+    
+      $sql = "UPDATE notification SET lu = TRUE WHERE idNotification = ?";
+      $stmt = $pdo->prepare($sql);
+      $stmt->execute([$notificationId]);
+    
+      echo json_encode(['success' => true]);
+      exit;
+    }
     // Modifier une réservation
     if (isset($_POST['modifyReservationId'], $_POST['newDateHeureDebut'], $_POST['newDateHeureFin'], $_POST['newMontantTotal'])) {
         $reservationId = $_POST['modifyReservationId'];
