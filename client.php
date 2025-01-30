@@ -9,7 +9,7 @@ if (!isset($_SESSION['user'])) {
 }
 
 $userId = $_SESSION['user']['id']; // Récupérer l'ID de l'utilisateur connecté
- 
+
 // Récupérer les notifications de l'utilisateur
 $sqlNotifications = "SELECT * FROM notification WHERE clientId = ? AND lu = FALSE ORDER BY dateEnvoi DESC";
 $stmtNotifications = $pdo->prepare($sqlNotifications);
@@ -17,7 +17,7 @@ $stmtNotifications->execute([$userId]);
 $notifications = $stmtNotifications->fetchAll(PDO::FETCH_ASSOC);
 
 // Récupérer les véhicules disponibles
-$sqlVehicules = "SELECT  * FROM vehicule";
+$sqlVehicules = "SELECT * FROM vehicule";
 $stmtVehicules = $pdo->query($sqlVehicules);
 $vehicules = $stmtVehicules->fetchAll(PDO::FETCH_ASSOC);
 
@@ -151,9 +151,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo json_encode(['success' => true, 'reservation' => $updatedReservation]);
         exit;
     }
-    $data = json_decode(file_get_contents('php://input'), true);
 
-    // Vérifier si c'est une mise à jour de notification
+    // Mettre à jour les notifications
+    $data = json_decode(file_get_contents('php://input'), true);
     if (isset($data['notificationId']) && is_numeric($data['notificationId'])) {
         $notificationId = $data['notificationId'];
 
@@ -626,13 +626,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </div>
 </div>
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
+   document.addEventListener('DOMContentLoaded', function () {
     fetch('fetch_vehicules.php')
         .then(response => response.json())
         .then(data => {
+            console.log("Réponse complète du serveur:", data);
             if (data.status === 'success') {
                 const vehiculesContainer = document.getElementById('vehicules-container');
-                vehiculesContainer.innerHTML = ''; // Vider le conteneur avant d'ajouter de nouveaux éléments
+                vehiculesContainer.innerHTML = ''; // Clear the container before adding new elements
 
                 data.data.forEach(vehicule => {
                     const vehiculeCard = document.createElement('div');
@@ -646,7 +647,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <p class="mt-2"><i class="bx bx-user"></i> Places: ${vehicule.nombrePlaces}</p>
                         <p class="mt-2"><i class="bx bx-gas-pump"></i> Carburant: ${vehicule.carburant}</p>
                         <p class="mt-2"><i class="bx bx-calendar"></i> Statut: ${vehicule.disponible}</p>
-                      <button onclick="openModal(<?php echo $vehicule['idVehicule']; ?>, <?php echo $vehicule['prixParJour']; ?>, <?php echo htmlspecialchars(json_encode($vehicule['reservedDates'])); ?>)" class="bg-blue-500 text-white p-2 rounded mt-4 w-full">Réserver</button>
+                        <button onclick='openModal(${vehicule.idVehicule}, ${vehicule.prixParJour}, ${JSON.stringify(vehicule.reservedDates || [])})' class="bg-blue-500 text-white p-2 rounded mt-4 w-full">Réserver</button>
                     `;
 
                     vehiculesContainer.appendChild(vehiculeCard);
@@ -700,44 +701,61 @@ function afficherSection(sectionId) {
 }
 
 // Fonction pour afficher la modale de réservation
-function openModal(vehiculeId, prixParJour, reservedDates) {
+function openModal(vehiculeId, prixParJour) {
     document.getElementById('vehiculeId').value = vehiculeId;
     document.getElementById('reservationModal').style.display = 'flex';
 
-    // Récupérer les éléments du formulaire
     const dateHeureDebutInput = document.getElementById('dateHeureDebut');
     const dateHeureFinInput = document.getElementById('dateHeureFin');
     const montantTotalInput = document.getElementById('montantTotal');
 
-    // Convertir les dates réservées en un tableau de dates
-    const reservedDatesArray = reservedDates.map(range => {
-        return {
-            start: new Date(range.dateHeureDebut),
-            end: new Date(range.dateHeureFin),
-        };
+    // Récupérer les dates réservées pour ce véhicule
+    const vehicule = <?php echo json_encode($vehicules); ?>.find(v => v.idVehicule == vehiculeId);
+    const reservedDates = vehicule ? vehicule.reservedDates : [];
+
+    // Convertir les plages de dates réservées en un tableau de jours désactivés
+    let disabledDates = [];
+
+    reservedDates.forEach(range => {
+        let startDate = new Date(range.dateHeureDebut);
+        let endDate = new Date(range.dateHeureFin);
+
+        while (startDate <= endDate) {
+            let dateStr = startDate.toISOString().split('T')[0]; // Format YYYY-MM-DD
+            if (!disabledDates.includes(dateStr)) {
+                disabledDates.push(dateStr); // Ajouter la date
+            }
+            startDate.setDate(startDate.getDate() + 1); // Passer au jour suivant
+        }
     });
 
-    // Configurer Flatpickr pour désactiver les dates réservées
+    console.log("🚫 Dates désactivées pour le véhicule " + vehiculeId + ":", disabledDates);
+
+    // Initialiser Flatpickr pour la date de début
     flatpickr(dateHeureDebutInput, {
         enableTime: true,
+        dateFormat: "Y-m-d H:i",
         minDate: "today",
-        disable: reservedDatesArray.map(range => ({ from: range.start, to: range.end })),
-        onChange: function(selectedDates, dateStr) {
-            dateHeureFinInput._flatpickr.set("minDate", selectedDates[0]);
+        disable: disabledDates, // Bloquer les dates réservées
+        onChange: function(selectedDates) {
+            if (selectedDates.length > 0) {
+                dateHeureFinInput._flatpickr.set("minDate", selectedDates[0]);
+            }
             calculerMontantTotal();
         },
     });
 
+    // Initialiser Flatpickr pour la date de fin
     flatpickr(dateHeureFinInput, {
         enableTime: true,
+        dateFormat: "Y-m-d H:i",
         minDate: "today",
-        disable: reservedDatesArray.map(range => ({ from: range.start, to: range.end })),
-        onChange: function(selectedDates, dateStr) {
+        disable: disabledDates, // Bloquer les dates réservées
+        onChange: function() {
             calculerMontantTotal();
         },
     });
 
-    // Fonction pour calculer le montant total
     function calculerMontantTotal() {
         const dateHeureDebutValue = dateHeureDebutInput.value;
         const dateHeureFinValue = dateHeureFinInput.value;
@@ -746,29 +764,23 @@ function openModal(vehiculeId, prixParJour, reservedDates) {
             const dateHeureDebutDate = new Date(dateHeureDebutValue);
             const dateHeureFinDate = new Date(dateHeureFinValue);
 
-            // Vérifier que la date de fin est après la date de début
             if (dateHeureFinDate <= dateHeureDebutDate) {
-                montantTotalInput.value = "0.00"; // Montant invalide si les dates sont incorrectes
+                montantTotalInput.value = "0.00";
                 return;
             }
 
-            // Calculer la différence en millisecondes
             const diffTime = Math.abs(dateHeureFinDate - dateHeureDebutDate);
-
-            // Convertir la différence en jours
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-            // Calculer le montant total
             const montantTotal = diffDays * prixParJour;
-            montantTotalInput.value = montantTotal.toFixed(2); // Afficher le montant total
+            montantTotalInput.value = montantTotal.toFixed(2);
         } else {
-            montantTotalInput.value = "0.00"; // Réinitialiser si une date est manquante
+            montantTotalInput.value = "0.00";
         }
     }
 
-    // Initialiser le montant total à 0.00
     montantTotalInput.value = "0.00";
 }
+
 
 // Fermer la modale de réservation
 function closeModal() {
@@ -778,6 +790,7 @@ function closeModal() {
 // Soumettre le formulaire de réservation
 document.getElementById('reservationForm').onsubmit = async function (e) {
     e.preventDefault();
+     console.log("ID du véhicule sélectionné:", vehiculeId);
     const formData = new FormData(this);
     const response = await fetch('', {
         method: 'POST',
