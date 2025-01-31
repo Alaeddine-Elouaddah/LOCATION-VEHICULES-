@@ -22,18 +22,19 @@ $stmtVehicules = $pdo->query($sqlVehicules);
 $vehicules = $stmtVehicules->fetchAll(PDO::FETCH_ASSOC);
 
 // Pour chaque véhicule, récupérer les dates réservées
+// Pour chaque véhicule, récupérer les dates réservées
 foreach ($vehicules as &$vehicule) {
-    $sqlReservedDates = "SELECT dateHeureDebut, dateHeureFin FROM reservation WHERE vehiculeId = ? AND statut != 'Annulée'";
-    $stmtReservedDates = $pdo->prepare($sqlReservedDates);
-    $stmtReservedDates->execute([$vehicule['idVehicule']]);
-    $vehicule['reservedDates'] = $stmtReservedDates->fetchAll(PDO::FETCH_ASSOC);
+  $sqlReservedDates = "SELECT dateHeureDebut, dateHeureFin FROM reservation WHERE vehiculeId = ? AND statut != 'Annulée'";
+  $stmtReservedDates = $pdo->prepare($sqlReservedDates);
+  $stmtReservedDates->execute([$vehicule['idVehicule']]);
+  $vehicule['reservedDates'] = $stmtReservedDates->fetchAll(PDO::FETCH_ASSOC);
 }
 
 // Récupérer les réservations de l'utilisateur
 $sqlReservations = "SELECT r.*, v.marque, v.modele, v.prixParJour 
                     FROM reservation r 
                     JOIN vehicule v ON r.vehiculeId = v.idVehicule 
-                    WHERE r.clientId = ? AND r.statut = 'En attente'";
+                    WHERE r.clientId = ?";
 $stmtReservations = $pdo->prepare($sqlReservations);
 $stmtReservations->execute([$userId]);
 $reservations = $stmtReservations->fetchAll(PDO::FETCH_ASSOC);
@@ -84,34 +85,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Annuler une réservation
 // Annuler et supprimer une réservation
+// Annuler une réservation
 if (isset($_POST['reservationId'])) {
   $reservationId = $_POST['reservationId'];
 
-  // Récupérer l'ID du véhicule associé à la réservation
-  $sqlGetVehiculeId = "SELECT vehiculeId FROM reservation WHERE idReservation = ?";
-  $stmtGetVehiculeId = $pdo->prepare($sqlGetVehiculeId);
-  $stmtGetVehiculeId->execute([$reservationId]);
-  $vehiculeId = $stmtGetVehiculeId->fetchColumn();
+  // Mettre à jour le statut de la réservation en "Annulée"
+  $sqlUpdateReservation = "UPDATE reservation SET statut = 'Annulée' WHERE idReservation = ? AND clientId = ?";
+  $stmtUpdateReservation = $pdo->prepare($sqlUpdateReservation);
+  $stmtUpdateReservation->execute([$reservationId, $userId]);
 
-  if ($vehiculeId) {
-      // Supprimer la réservation
-      $sqlDeleteReservation = "DELETE FROM reservation WHERE idReservation = ? AND clientId = ?";
-      $stmtDeleteReservation = $pdo->prepare($sqlDeleteReservation);
-      $stmtDeleteReservation->execute([$reservationId, $userId]);
+  // Mettre à jour le statut du véhicule en "Disponible" si aucune autre réservation active n'existe
+  $sqlCheckActiveReservations = "SELECT * FROM reservation 
+                                 WHERE vehiculeId = (SELECT vehiculeId FROM reservation WHERE idReservation = ?)
+                                 AND statut != 'Annulée'";
+  $stmtCheckActiveReservations = $pdo->prepare($sqlCheckActiveReservations);
+  $stmtCheckActiveReservations->execute([$reservationId]);
 
-      // Mettre à jour le statut du véhicule en "Disponible"
-      $sqlUpdateVehicule = "UPDATE vehicule SET disponible = 'Disponible' WHERE idVehicule = ?";
+  if ($stmtCheckActiveReservations->rowCount() === 0) {
+      $sqlUpdateVehicule = "UPDATE vehicule SET disponible = 'Disponible' WHERE idVehicule = (SELECT vehiculeId FROM reservation WHERE idReservation = ?)";
       $stmtUpdateVehicule = $pdo->prepare($sqlUpdateVehicule);
-      $stmtUpdateVehicule->execute([$vehiculeId]);
-
-      echo json_encode(['success' => true]);
-      exit;
-  } else {
-      echo json_encode(['success' => false, 'message' => 'Réservation introuvable']);
-      exit;
+      $stmtUpdateVehicule->execute([$reservationId]);
   }
-}
 
+  echo json_encode(['success' => true]);
+  exit;
+}
 
     // Modifier une réservation
     if (isset($_POST['modifyReservationId'], $_POST['newDateHeureDebut'], $_POST['newDateHeureFin'], $_POST['newMontantTotal'])) {
@@ -423,29 +421,37 @@ if (isset($_POST['reservationId'])) {
       <section id="reservations" class="hidden p-6 bg-white rounded-lg shadow-md">
   <h1 class="text-2xl font-semibold text-gray-800 mb-6">Mes Réservations</h1>
   <div class="overflow-x-auto">
-    <table class="w-full bg-white rounded-lg overflow-hidden">
-      <thead class="bg-gray-50">
-        <tr>
-          <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">ID</th>
-          <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Véhicule</th>
-          <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Date de début</th>
-          <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Date de fin</th>
-          <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Montant Total</th>
-          <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Statut</th>
-          <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Actions</th>
-        </tr>
-      </thead>
-      <tbody class="divide-y divide-gray-100">
-        <?php if (!empty($reservations)): ?>
-          <?php foreach ($reservations as $reservation): ?>
-            <tr id="reservation-<?php echo $reservation['idReservation']; ?>" class="hover:bg-gray-50 transition-colors duration-200">
-              <td class="px-6 py-4 text-sm text-gray-700"><?php echo htmlspecialchars($reservation['idReservation']); ?></td>
-              <td class="px-6 py-4 text-sm text-gray-700"><?php echo htmlspecialchars($reservation['marque'] . ' ' . $reservation['modele']); ?></td>
-              <td class="px-6 py-4 text-sm text-gray-700"><?php echo date('d/m/Y H:i', strtotime($reservation['dateHeureDebut'])); ?></td>
-              <td class="px-6 py-4 text-sm text-gray-700"><?php echo date('d/m/Y H:i', strtotime($reservation['dateHeureFin'])); ?></td>
-              <td class="px-6 py-4 text-sm text-gray-700"><?php echo htmlspecialchars($reservation['montantTotal']); ?> Mad</td>
-              <td class="px-6 py-4 text-sm text-gray-700"><?php echo htmlspecialchars($reservation['statut']); ?></td>
-              <td class="px-6 py-4 text-sm">
+  <table class="w-full bg-white rounded-lg overflow-hidden">
+  <thead class="bg-gray-50">
+    <tr>
+      <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">ID</th>
+      <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Véhicule</th>
+      <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Date de début</th>
+      <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Date de fin</th>
+      <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Montant Total</th>
+      <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Statut</th>
+      <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Actions</th>
+    </tr>
+  </thead>
+  <tbody class="divide-y divide-gray-100">
+    <?php
+    // Fonction de tri des réservations
+    usort($reservations, function ($a, $b) {
+        $order = ['En attente' => 1, 'Confirmée' => 2, 'Annulée' => 3];
+        return $order[$a['statut']] <=> $order[$b['statut']];
+    });
+
+    if (!empty($reservations)): 
+        foreach ($reservations as $reservation): ?>
+          <tr id="reservation-<?php echo $reservation['idReservation']; ?>" class="hover:bg-gray-50 transition-colors duration-200">
+            <td class="px-6 py-4 text-sm text-gray-700"><?php echo htmlspecialchars($reservation['idReservation']); ?></td>
+            <td class="px-6 py-4 text-sm text-gray-700"><?php echo htmlspecialchars($reservation['marque'] . ' ' . $reservation['modele']); ?></td>
+            <td class="px-6 py-4 text-sm text-gray-700"><?php echo date('d/m/Y H:i', strtotime($reservation['dateHeureDebut'])); ?></td>
+            <td class="px-6 py-4 text-sm text-gray-700"><?php echo date('d/m/Y H:i', strtotime($reservation['dateHeureFin'])); ?></td>
+            <td class="px-6 py-4 text-sm text-gray-700"><?php echo htmlspecialchars($reservation['montantTotal']); ?> Mad</td>
+            <td class="px-6 py-4 text-sm text-gray-700"><?php echo htmlspecialchars($reservation['statut']); ?></td>
+            <td class="px-6 py-4 text-sm">
+              <?php if ($reservation['statut'] !== 'Annulée' && $reservation['statut'] !== 'Confirmée'): ?>
                 <button
                   onclick="annulerReservation(<?php echo $reservation['idReservation']; ?>)"
                   class="bg-red-500 text-white px-3 py-1.5 rounded-md hover:bg-red-600 transition-colors duration-200"
@@ -458,16 +464,17 @@ if (isset($_POST['reservationId'])) {
                 >
                   Modifier
                 </button>
-              </td>
-            </tr>
-          <?php endforeach; ?>
-        <?php else: ?>
-          <tr>
-            <td colspan="7" class="px-6 py-4 text-sm text-center text-gray-500">Aucune réservation trouvée.</td>
+              <?php endif; ?>
+            </td>
           </tr>
-        <?php endif; ?>
-      </tbody>
-    </table>
+        <?php endforeach; ?>
+    <?php else: ?>
+      <tr>
+        <td colspan="7" class="px-6 py-4 text-sm text-center text-gray-500">Aucune réservation trouvée.</td>
+      </tr>
+    <?php endif; ?>
+  </tbody>
+</table>
   </div>
 </section>
     </main>
@@ -963,6 +970,7 @@ function modifierReservation(reservationId) {
                 to: new Date(range.dateHeureFin),
             };
         });
+        console.log("🚫 Dates réservées pour le véhicule " + vehiculeId + ":", reservedDatesArray);
 
         // Initialiser Flatpickr pour les champs de date
         flatpickr("#newDateHeureDebut", {
