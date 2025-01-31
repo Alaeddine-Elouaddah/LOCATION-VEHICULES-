@@ -83,28 +83,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Annuler une réservation
-    if (isset($_POST['reservationId'])) {
-        $reservationId = $_POST['reservationId'];
+// Annuler et supprimer une réservation
+if (isset($_POST['reservationId'])) {
+  $reservationId = $_POST['reservationId'];
 
-        // Récupérer l'ID du véhicule associé à la réservation
-        $sqlGetVehiculeId = "SELECT vehiculeId FROM reservation WHERE idReservation = ?";
-        $stmtGetVehiculeId = $pdo->prepare($sqlGetVehiculeId);
-        $stmtGetVehiculeId->execute([$reservationId]);
-        $vehiculeId = $stmtGetVehiculeId->fetchColumn();
+  // Récupérer l'ID du véhicule associé à la réservation
+  $sqlGetVehiculeId = "SELECT vehiculeId FROM reservation WHERE idReservation = ?";
+  $stmtGetVehiculeId = $pdo->prepare($sqlGetVehiculeId);
+  $stmtGetVehiculeId->execute([$reservationId]);
+  $vehiculeId = $stmtGetVehiculeId->fetchColumn();
 
-        // Annuler la réservation
-        $sql = "UPDATE reservation SET statut = 'Annulée' WHERE idReservation = ? AND clientId = ?";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$reservationId, $userId]);
+  if ($vehiculeId) {
+      // Supprimer la réservation
+      $sqlDeleteReservation = "DELETE FROM reservation WHERE idReservation = ? AND clientId = ?";
+      $stmtDeleteReservation = $pdo->prepare($sqlDeleteReservation);
+      $stmtDeleteReservation->execute([$reservationId, $userId]);
 
-        // Mettre à jour le statut du véhicule en "Disponible"
-        $sqlUpdateVehicule = "UPDATE vehicule SET disponible = 'Disponible' WHERE idVehicule = ?";
-        $stmtUpdateVehicule = $pdo->prepare($sqlUpdateVehicule);
-        $stmtUpdateVehicule->execute([$vehiculeId]);
+      // Mettre à jour le statut du véhicule en "Disponible"
+      $sqlUpdateVehicule = "UPDATE vehicule SET disponible = 'Disponible' WHERE idVehicule = ?";
+      $stmtUpdateVehicule = $pdo->prepare($sqlUpdateVehicule);
+      $stmtUpdateVehicule->execute([$vehiculeId]);
 
-        echo json_encode(['success' => true]);
-        exit;
-    }
+      echo json_encode(['success' => true]);
+      exit;
+  } else {
+      echo json_encode(['success' => false, 'message' => 'Réservation introuvable']);
+      exit;
+  }
+}
+
 
     // Modifier une réservation
     if (isset($_POST['modifyReservationId'], $_POST['newDateHeureDebut'], $_POST['newDateHeureFin'], $_POST['newMontantTotal'])) {
