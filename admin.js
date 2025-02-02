@@ -1,3 +1,5 @@
+
+//CHECKKKKKK 
 // Fonction pour afficher/masquer les sections
 function afficherSection(sectionId) {
     const sections = document.querySelectorAll("main > section");
