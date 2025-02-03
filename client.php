@@ -186,6 +186,148 @@ if (isset($_POST['reservationId'])) {
     body {
       font-family: "Itim", cursive;
     }
+    /* Mode nuit plus fort */
+body.dark-mode {
+    background-color: #0f172a; /* Fond très sombre */
+    color: #f8fafc; /* Texte clair */
+}
+
+body.dark-mode .vehicle-card {
+    background-color: #1e293b; /* Fond des cartes plus sombre */
+    color: #f8fafc; /* Texte clair */
+}
+
+body.dark-mode .vehicle-card h3,
+body.dark-mode .vehicle-card p {
+    color: #f8fafc; /* Texte clair */
+}
+
+body.dark-mode .btn-primary {
+    background-color: #4fd1c5; /* Bouton primaire */
+    color: #0f172a; /* Texte sombre */
+}
+
+body.dark-mode .modal-content {
+    background-color: #1e293b; /* Fond des modales plus sombre */
+    color: #f8fafc; /* Texte clair */
+}
+
+body.dark-mode #sidebar {
+    background-color: #1e293b; /* Fond de la sidebar plus sombre */
+    color: #f8fafc; /* Texte clair */
+}
+
+body.dark-mode #sidebar button {
+    color: #f8fafc; /* Texte clair */
+}
+
+body.dark-mode #sidebar button:hover {
+    background-color: #334155; /* Fond au survol plus sombre */
+}
+
+body.dark-mode .notification-dropdown {
+    background-color: #1e293b; /* Fond des notifications plus sombre */
+    border-color: #334155; /* Bordure plus sombre */
+}
+
+body.dark-mode .notification-item {
+    color: #f8fafc; /* Texte clair */
+}
+
+body.dark-mode .notification-item:hover {
+    background-color: #334155; /* Fond au survol plus sombre */
+}
+
+body.dark-mode #searchReservationInput {
+    background-color: #1e293b; /* Fond de la barre de recherche plus sombre */
+    color: #f8fafc; /* Texte clair */
+    border-color: #334155; /* Bordure plus sombre */
+}
+
+body.dark-mode #searchReservationInput:focus {
+    border-color: #4fd1c5; /* Bordure en focus */
+    box-shadow: 0 0 0 3px rgba(79, 209, 197, 0.1); /* Effet de focus */
+}
+    /* Mode nuit plus fort */
+body.dark-mode {
+    background-color: #0f172a; /* Fond très sombre */
+    color: #f8fafc; /* Texte clair */
+}
+
+body.dark-mode .vehicle-card {
+    background-color: #1e293b; /* Fond des cartes plus sombre */
+    color: #f8fafc; /* Texte clair */
+}
+
+body.dark-mode .vehicle-card h3,
+body.dark-mode .vehicle-card p {
+    color: #f8fafc; /* Texte clair */
+}
+
+body.dark-mode .btn-primary {
+    background-color: #4fd1c5; /* Bouton primaire */
+    color: #0f172a; /* Texte sombre */
+}
+
+body.dark-mode .modal-content {
+    background-color: #1e293b; /* Fond des modales plus sombre */
+    color: #f8fafc; /* Texte clair */
+}
+
+body.dark-mode #sidebar {
+    background-color: #1e293b; /* Fond de la sidebar plus sombre */
+    color: #f8fafc; /* Texte clair */
+}
+
+body.dark-mode #sidebar button {
+    color: #f8fafc; /* Texte clair */
+}
+
+body.dark-mode #sidebar button:hover {
+    background-color: #334155; /* Fond au survol plus sombre */
+}
+
+body.dark-mode .notification-dropdown {
+    background-color: #1e293b; /* Fond des notifications plus sombre */
+    border-color: #334155; /* Bordure plus sombre */
+}
+
+body.dark-mode .notification-item {
+    color: #f8fafc; /* Texte clair */
+}
+
+body.dark-mode .notification-item:hover {
+    background-color: #334155; /* Fond au survol plus sombre */
+}
+
+body.dark-mode #searchReservationInput {
+    background-color: #1e293b; /* Fond de la barre de recherche plus sombre */
+    color: #f8fafc; /* Texte clair */
+    border-color: #334155; /* Bordure plus sombre */
+}
+
+body.dark-mode #searchReservationInput:focus {
+    border-color: #4fd1c5; /* Bordure en focus */
+    box-shadow: 0 0 0 3px rgba(79, 209, 197, 0.1); /* Effet de focus */
+}
+body.dark-mode table {
+    background-color: #1e293b; /* Fond du tableau plus sombre */
+    color: #f8fafc; /* Texte clair */
+}
+
+body.dark-mode table th {
+    background-color: #334155; /* Fond des en-têtes de tableau plus sombre */
+    color: #f8fafc; /* Texte clair */
+}
+
+body.dark-mode table td {
+    background-color: #1e293b; /* Fond des cellules plus sombre */
+    color: #f8fafc; /* Texte clair */
+}
+
+body.dark-mode table tr:hover {
+    background-color: #334155; /* Fond au survol plus sombre */
+}
     .vehicle-card {
       background-color: #ffffff;
       border-radius: 8px;
@@ -349,6 +491,59 @@ if (isset($_POST['reservationId'])) {
         transform: translateX(0);
       }
     }
+    /* Style pour le range input */
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 8px;
+    background: #e2e8f0;
+    border-radius: 5px;
+    outline: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+input[type="range"]:hover {
+    opacity: 1;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #4fd1c5;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: #4fd1c5;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Style pour les checkboxes */
+input[type="checkbox"] {
+    accent-color: #4fd1c5;
+}
+    #searchReservationInput {
+    width: 100%; /* Prend toute la largeur disponible */
+    max-width: 300px; /* Largeur maximale */
+    padding: 0.5rem;
+    border: 1px solid #d1d5db; /* Couleur de bordure grise */
+    border-radius: 0.375rem; /* Arrondi des coins */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#searchReservationInput:focus {
+    border-color: #3b82f6; /* Couleur de bordure bleue en focus */
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); /* Effet de focus */
+}
   </style>
 </head>
 <body class="bg-gray-100 text-gray-900">
@@ -394,7 +589,7 @@ if (isset($_POST['reservationId'])) {
       </button>
     </div>
   </header>
-
+ 
   <div class="flex p-3 gap-4">
     <aside id="sidebar" class="w-42 hidden lg:block rounded-lg bg-gray-800 p-2 py-5 fixed lg:relative lg:translate-x-0 transform -translate-x-full transition-transform duration-200 ease-in-out">
       <nav class="space-y-4">
@@ -407,9 +602,85 @@ if (isset($_POST['reservationId'])) {
           <span>Mes Réservations</span>
         </button>
       </nav>
+      <br><br><br>
+      <section id="filtres" class="p-4 bg-gray-700 rounded-lg shadow-md mb-6 text-white">
+    <h2 class="text-xl font-semibold mb-4">Filtrer les véhicules</h2>
+
+    <!-- Filtre par nom de voiture -->
+    <div class="mb-4">
+        <label for="searchCarName" class="block text-sm font-medium mb-2">Nom de la voiture</label>
+        <input
+            type="text"
+            id="searchCarName"
+            placeholder="Rechercher par nom..."
+            class="w-full p-2 border border-gray-500 rounded-md bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+    </div>
+
+    <!-- Filtre par prix (range) -->
+    <div class="mb-4">
+        <label for="priceRange" class="block text-sm font-medium mb-2">Prix par jour (MAD)</label>
+        <input
+            type="range"
+            id="priceRange"
+            min="0"
+            max="1000"
+            step="50"
+            value="1000"
+            class="w-full"
+        />
+        <span id="priceRangeValue" class="text-sm">0 - 1000 MAD</span>
+    </div>
+
+    <!-- Filtre par type de carburant (checkboxes) -->
+    <div class="mb-4">
+        <label class="block text-sm font-medium mb-2">Type de carburant</label>
+        <div class="flex flex-wrap gap-4">
+            <label class="flex items-center">
+                <input type="checkbox" name="carburant" value="Essence" class="mr-2">
+                <span class="text-sm">Essence</span>
+            </label>
+            <label class="flex items-center">
+                <input type="checkbox" name="carburant" value="Diesel" class="mr-2">
+                <span class="text-sm">Diesel</span>
+            </label>
+            <label class="flex items-center">
+                <input type="checkbox" name="carburant" value="Électrique" class="mr-2">
+                <span class="text-sm">Électrique</span>
+            </label>
+            <label class="flex items-center">
+                <input type="checkbox" name="carburant" value="Hybride" class="mr-2">
+                <span class="text-sm">Hybride</span>
+            </label>
+        </div>
+    </div>
+
+    <!-- Bouton pour appliquer les filtres -->
+ <button
+    id="applyFilters"
+    class="bg-gray-200 text-black px-4 py-2 rounded-md hover:bg-blue-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 w-full text-center transition-colors duration-200"
+>
+    Appliquer les filtres
+</button>
+</section>
+
     </aside>
     <main class="flex-1 bg-gray-100 flex flex-col gap-4 ml-0 lg:ml-42">
-      <!-- Section Véhicules Disponibles -->
+    <!-- Section Filtres de recherche -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Section Véhicules Disponibles -->
       <section id="vehicules" class="p-4 space-y-6 bg-white flex flex-col rounded-lg shadow-md">
     <h1 class="text-2xl font-semibold text-gray-900 mb-6">Véhicules Disponibles</h1>
     <div id="vehicules-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -418,64 +689,79 @@ if (isset($_POST['reservationId'])) {
 </section>
 
       <!-- Section Mes Réservations -->
-      <section id="reservations" class="hidden p-6 bg-white rounded-lg shadow-md">
-  <h1 class="text-2xl font-semibold text-gray-800 mb-6">Mes Réservations</h1>
-  <div class="overflow-x-auto">
-  <table class="w-full bg-white rounded-lg overflow-hidden">
-  <thead class="bg-gray-50">
-    <tr>
-      <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">ID</th>
-      <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Véhicule</th>
-      <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Date de début</th>
-      <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Date de fin</th>
-      <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Montant Total</th>
-      <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Statut</th>
-      <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Actions</th>
-    </tr>
-  </thead>
-  <tbody class="divide-y divide-gray-100">
-    <?php
-    // Fonction de tri des réservations
-    usort($reservations, function ($a, $b) {
-        $order = ['En attente' => 1, 'Confirmée' => 2, 'Annulée' => 3];
-        return $order[$a['statut']] <=> $order[$b['statut']];
-    });
+   <!-- Section Mes Réservations -->
+<section id="reservations" class="hidden p-6 bg-white rounded-lg shadow-md">
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-semibold text-gray-800">Mes Réservations</h1>
+        
+        <!-- Barre de recherche à droite -->
+        <div>
+            <input 
+                type="text" 
+                id="searchReservationInput" 
+                placeholder="Rechercher une réservation..." 
+                class="p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+        </div>
+    </div>
 
-    if (!empty($reservations)): 
-        foreach ($reservations as $reservation): ?>
-          <tr id="reservation-<?php echo $reservation['idReservation']; ?>" class="hover:bg-gray-50 transition-colors duration-200">
-            <td class="px-6 py-4 text-sm text-gray-700"><?php echo htmlspecialchars($reservation['idReservation']); ?></td>
-            <td class="px-6 py-4 text-sm text-gray-700"><?php echo htmlspecialchars($reservation['marque'] . ' ' . $reservation['modele']); ?></td>
-            <td class="px-6 py-4 text-sm text-gray-700"><?php echo date('d/m/Y H:i', strtotime($reservation['dateHeureDebut'])); ?></td>
-            <td class="px-6 py-4 text-sm text-gray-700"><?php echo date('d/m/Y H:i', strtotime($reservation['dateHeureFin'])); ?></td>
-            <td class="px-6 py-4 text-sm text-gray-700"><?php echo htmlspecialchars($reservation['montantTotal']); ?> Mad</td>
-            <td class="px-6 py-4 text-sm text-gray-700"><?php echo htmlspecialchars($reservation['statut']); ?></td>
-            <td class="px-6 py-4 text-sm">
-              <?php if ($reservation['statut'] !== 'Annulée' && $reservation['statut'] !== 'Confirmée'): ?>
-                <button
-                  onclick="annulerReservation(<?php echo $reservation['idReservation']; ?>)"
-                  class="bg-red-500 text-white px-3 py-1.5 rounded-md hover:bg-red-600 transition-colors duration-200"
-                >
-                  Annuler
-                </button>
-                <button
-                  onclick="modifierReservation(<?php echo $reservation['idReservation']; ?>)"
-                  class="bg-yellow-500 text-white px-3 py-1.5 rounded-md hover:bg-yellow-600 transition-colors duration-200"
-                >
-                  Modifier
-                </button>
-              <?php endif; ?>
-            </td>
-          </tr>
-        <?php endforeach; ?>
-    <?php else: ?>
-      <tr>
-        <td colspan="7" class="px-6 py-4 text-sm text-center text-gray-500">Aucune réservation trouvée.</td>
-      </tr>
-    <?php endif; ?>
-  </tbody>
-</table>
-  </div>
+    <!-- Tableau des réservations -->
+    <div class="overflow-x-auto">
+        <table class="w-full bg-white rounded-lg overflow-hidden">
+            <thead class="bg-gray-50">
+                <tr>
+                    <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">ID</th>
+                    <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Véhicule</th>
+                    <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Date de début</th>
+                    <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Date de fin</th>
+                    <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Montant Total</th>
+                    <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Statut</th>
+                    <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+                <?php
+                // Fonction de tri des réservations
+                usort($reservations, function ($a, $b) {
+                    $order = ['En attente' => 1, 'Confirmée' => 2, 'Annulée' => 3];
+                    return $order[$a['statut']] <=> $order[$b['statut']];
+                });
+
+                if (!empty($reservations)): 
+                    foreach ($reservations as $reservation): ?>
+                        <tr id="reservation-<?php echo $reservation['idReservation']; ?>" class="hover:bg-gray-50 transition-colors duration-200">
+                            <td class="px-6 py-4 text-sm text-gray-700"><?php echo htmlspecialchars($reservation['idReservation']); ?></td>
+                            <td class="px-6 py-4 text-sm text-gray-700"><?php echo htmlspecialchars($reservation['marque'] . ' ' . $reservation['modele']); ?></td>
+                            <td class="px-6 py-4 text-sm text-gray-700"><?php echo date('d/m/Y H:i', strtotime($reservation['dateHeureDebut'])); ?></td>
+                            <td class="px-6 py-4 text-sm text-gray-700"><?php echo date('d/m/Y H:i', strtotime($reservation['dateHeureFin'])); ?></td>
+                            <td class="px-6 py-4 text-sm text-gray-700"><?php echo htmlspecialchars($reservation['montantTotal']); ?> Mad</td>
+                            <td class="px-6 py-4 text-sm text-gray-700"><?php echo htmlspecialchars($reservation['statut']); ?></td>
+                            <td class="px-6 py-4 text-sm">
+                                <?php if ($reservation['statut'] !== 'Annulée' && $reservation['statut'] !== 'Confirmée'): ?>
+                                    <button
+                                        onclick="annulerReservation(<?php echo $reservation['idReservation']; ?>)"
+                                        class="bg-red-500 text-white px-3 py-1.5 rounded-md hover:bg-red-600 transition-colors duration-200"
+                                    >
+                                        Annuler
+                                    </button>
+                                    <button
+                                        onclick="modifierReservation(<?php echo $reservation['idReservation']; ?>)"
+                                        class="bg-yellow-500 text-white px-3 py-1.5 rounded-md hover:bg-yellow-600 transition-colors duration-200"
+                                    >
+                                        Modifier
+                                    </button>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="7" class="px-6 py-4 text-sm text-center text-gray-500">Aucune réservation trouvée.</td>
+                    </tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
 </section>
     </main>
   </div>
@@ -640,6 +926,86 @@ if (isset($_POST['reservationId'])) {
   </div>
 </div>
   <script>
+    afficherSection
+    document.addEventListener('DOMContentLoaded', function () {
+    // Récupérer les éléments de filtre
+    const searchCarNameInput = document.getElementById('searchCarName');
+    const priceRangeInput = document.getElementById('priceRange');
+    const priceRangeValue = document.getElementById('priceRangeValue');
+    const carburantCheckboxes = document.querySelectorAll('input[name="carburant"]');
+    const applyFiltersButton = document.getElementById('applyFilters');
+
+    // Mettre à jour la valeur du prix affiché
+    priceRangeInput.addEventListener('input', () => {
+        priceRangeValue.textContent = `0 - ${priceRangeInput.value} MAD`;
+    });
+
+    // Appliquer les filtres lorsque le bouton est cliqué
+    applyFiltersButton.addEventListener('click', () => {
+        filterVehicules();
+    });
+
+    // Fonction pour filtrer les véhicules
+    function filterVehicules() {
+        const searchTerm = searchCarNameInput.value.toLowerCase();
+        const maxPrice = parseFloat(priceRangeInput.value);
+        const selectedCarburants = Array.from(carburantCheckboxes)
+            .filter(checkbox => checkbox.checked)
+            .map(checkbox => checkbox.value);
+
+        // Récupérer tous les véhicules
+        const vehicules = <?php echo json_encode($vehicules); ?>;
+
+        // Filtrer les véhicules
+        const filteredVehicules = vehicules.filter(vehicule => {
+            const matchesName = vehicule.marque.toLowerCase().includes(searchTerm) || vehicule.modele.toLowerCase().includes(searchTerm);
+            const matchesPrice = vehicule.prixParJour <= maxPrice;
+            const matchesCarburant = selectedCarburants.length === 0 || selectedCarburants.includes(vehicule.carburant);
+
+            return matchesName && matchesPrice && matchesCarburant;
+        });
+
+        // Mettre à jour l'affichage des véhicules
+        updateVehiculesDisplay(filteredVehicules);
+    }
+
+    // Fonction pour mettre à jour l'affichage des véhicules
+    function updateVehiculesDisplay(vehicules) {
+        const vehiculesContainer = document.getElementById('vehicules-container');
+        vehiculesContainer.innerHTML = ''; // Vider le conteneur
+
+        vehicules.forEach(vehicule => {
+            const vehiculeCard = document.createElement('div');
+            vehiculeCard.className = 'vehicle-card';
+
+            vehiculeCard.innerHTML = `
+                <img src="uploads/${vehicule.image}" />
+                <h3 class="mt-4">${vehicule.marque} ${vehicule.modele}</h3>
+                <p class="mt-2"><i class="bx bx-car"></i> Type: ${vehicule.type}</p>
+                <p class="mt-2"><i class="bx bx-money"></i> Prix par jour: ${vehicule.prixParJour} Mad</p>
+                <p class="mt-2"><i class="bx bx-user"></i> Places: ${vehicule.nombrePlaces}</p>
+                <p class="mt-2"><i class="bx bx-gas-pump"></i> Carburant: ${vehicule.carburant}</p>
+                <p class="mt-2"><i class="bx bx-calendar"></i> Statut: ${vehicule.disponible}</p>
+                <button onclick='openModal(${vehicule.idVehicule}, ${vehicule.prixParJour}, ${JSON.stringify(vehicule.reservedDates || [])})' class="bg-blue-500 text-white p-2 rounded mt-4 w-full">Réserver</button>
+            `;
+
+            vehiculesContainer.appendChild(vehiculeCard);
+        });
+    }
+});
+    document.getElementById('searchReservationInput').addEventListener('input', function () {
+    const searchTerm = this.value.toLowerCase(); // Récupérer le terme de recherche
+    const rows = document.querySelectorAll('#reservations tbody tr'); // Sélectionner toutes les lignes du tableau
+
+    rows.forEach(row => {
+        const rowText = row.textContent.toLowerCase(); // Récupérer le texte de la ligne
+        if (rowText.includes(searchTerm)) {
+            row.style.display = ''; // Afficher la ligne si elle correspond
+        } else {
+            row.style.display = 'none'; // Masquer la ligne si elle ne correspond pas
+        }
+    });
+});
    document.addEventListener('DOMContentLoaded', function () {
     fetch('fetch_vehicules.php')
         .then(response => response.json())
@@ -705,6 +1071,8 @@ function afficherNotification(message, type) {
 // Fonction pour afficher ou masquer les sections
 function afficherSection(sectionId) {
     const sections = document.querySelectorAll('main section');
+    const filtresSection = document.getElementById('filtres');
+
     sections.forEach(section => {
         if (section.id === sectionId) {
             section.classList.remove('hidden');
@@ -712,7 +1080,18 @@ function afficherSection(sectionId) {
             section.classList.add('hidden');
         }
     });
+
+    // Afficher ou masquer la section des filtres en fonction de la section active
+    if (sectionId === 'vehicules') {
+        filtresSection.classList.remove('hidden');
+    } else {
+        filtresSection.classList.add('hidden');
+    }
 }
+document.addEventListener('DOMContentLoaded', function () {
+    // Afficher la section des véhicules par défaut
+    afficherSection('vehicules');
+});
 
 // Fonction pour afficher la modale de réservation
 function openModal(vehiculeId, prixParJour) {
